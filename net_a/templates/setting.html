@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="sanitize" type="text/css" href="sanitize.css">
+    <!--スライドショーにslickを使う-->
+    <link rel="stylesheet" href="./slick/slick.css"><link rel="stylesheet" href="./slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>NetA</title>
+</head>
+<header>
+    <?php include'header.php';//echo "$header"; ?>
+</header>
+<main id="setting">
+    <section>
+        <a class="icon_setting" href="アイコン変更"><img src="image/icon1.PNG" class="icon" alt="アイコン"></a>
+        <div class="setting_box">
+            <div>
+                Level.
+                <span class="my_level">1</span>
+            </div>
+            <div>
+                Exp
+                <span class="my_level_exp">0</span>
+                /1000
+            </div>
+            <div>
+                <a href="" class="gacha_image"><img src="image/gacha0.PNG" alt=""></a>
+            </div>
+        </div>
+    </section>
+    <section class="setting_box">
+        <h3>ニックネーム</h3>
+        <input type="text" class="input_text" value="熱太">
+        <h3>メールアドレス</h3>
+        <input type="mail" class="input_text" value="○○○○○○@gmail.com">
+        <h3>パスワード</h3>
+        <input type="password" class="input_text"value="*********">
+        <input class="button" type="submit" value="変更する">
+    </section>
+    
+</main>
+
+<footer>
+    <?php 
+        include'footer.php';
+    ?>
+</footer>
+</body>
+</html>
