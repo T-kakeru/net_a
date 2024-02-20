@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="sanitize" type="text/css" href="sanitize.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Document</title>
-</head>
-<body>
-<header>
-</header>
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
 <main class="body_color">
     <div class="mp_title">
         <h2>こんにちは、熱田さん</h2>
@@ -24,11 +16,4 @@
         <!--<div>閲覧履歴</div>-->
     </section>
 </main>
-
-<footer>
-    <?php 
-        include'footer.php';
-    ?>
-</footer>
-</body>
-</html>
+{% endblock %}

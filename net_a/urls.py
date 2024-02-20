@@ -4,7 +4,7 @@ from . import views
 app_name = 'net_a'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('mypage/', views.my_page, name='my_page')
+    path('my_page/', views.my_page, name='my_page')
 ]
 
 """my_pageへのURL設定↑（1行）"""
