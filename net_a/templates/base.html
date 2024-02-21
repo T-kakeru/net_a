@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="sanitize" type="text/css" href="sanitize.css">
+    <link rel="sanitize" type="text/css" href="{% static 'css/sanitize.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <!--スライドショーにslickを使う-->
     <link rel="stylesheet" href="{% static 'js/slick/slick.css' %}">
@@ -15,7 +15,7 @@
 <header>
     <div class="header_menu">
         <div class="header_flex_image">
-            <img class="logo" src="image/logo.PNG" alt="ロゴ">
+            <a href="{% url 'index' %}"><img class="logo" src="{% static 'img/logo.PNG' %}" alt="ロゴ"></a>
             <div class="header_space center_space"></div>
             <!--アイコン,my_page.htmlへ-->
             <a href="{% url 'my_page' %}"><img src="{% static 'img/icon1.PNG' %}" class="icon" alt="アイコン"></a>

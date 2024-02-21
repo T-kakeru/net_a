@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="sanitize" type="text/css" href="sanitize.css">
-    <!--スライドショーにslickを使う-->
-    <link rel="stylesheet" href="./slick/slick.css"><link rel="stylesheet" href="./slick/slick-theme.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>NetA</title>
-</head>
-<header>
-    <?php include'header.php';//echo "$header"; ?>
-</header>
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
 <main id="setting">
     <section>
         <a class="icon_setting" href="アイコン変更"><img src="image/icon1.PNG" class="icon" alt="アイコン"></a>
@@ -40,13 +29,5 @@
         <input type="password" class="input_text"value="*********">
         <input class="button" type="submit" value="変更する">
     </section>
-    
 </main>
-
-<footer>
-    <?php 
-        include'footer.php';
-    ?>
-</footer>
-</body>
-</html>
+{% endblock %}

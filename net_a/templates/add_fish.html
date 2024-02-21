@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="sanitize" type="text/css" href="sanitize.css">
-    <!--スライドショーにslickを使う-->
-    <link rel="stylesheet" href="./slick/slick.css"><link rel="stylesheet" href="./slick/slick-theme.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>NetA</title>
-</head>
-<header>
-    <?php include'header.php';//echo "$header"; ?>
-</header>
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
 <main id="setting">
 <section>
     <h2>飼っている魚・近くの魚を投稿</h2>
@@ -125,11 +114,4 @@
     <input class="button" type="submit" value="確認画面へ">
 </section>    
 </main>
-
-<footer>
-    <?php 
-        include'footer.php';
-    ?>
-</footer>
-</body>
-</html>
+{% endblock %}

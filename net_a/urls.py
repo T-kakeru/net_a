@@ -3,7 +3,7 @@ from . import views
 
 app_name = 'net_a'
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('index', views.index, name='index'),
     path('my_page/', views.my_page, name='my_page')
 ]
 
