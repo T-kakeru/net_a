@@ -1,34 +1,40 @@
 from django.shortcuts import render
 
-def index(request):
+def sign_up_check(request):
+    return render(request, 'sign_up_check.html')
+def sign_up(request):
     return render(request, 'sign_up.html')
-def index(request):
+def sign_in(request):
     return render(request, 'sign_in.html')
-def index(request):
+def setting(request):
     return render(request, 'setting.html')
-def index(request):
+def search(request):
     return render(request, 'search.html')
-def index(request):
+def privacy(request):
     return render(request, 'privacy.html')
-def index(request):
+def net_a_tutorial(request):
     return render(request, 'net_a_tutorial.html')
 def my_page(request):
     return render(request, 'my_page.html')
-def index(request):
+def my_fish(request):
     return render(request, 'my_fish.html')
 def index(request):
+    return render(request, 'index.html')
+def history(request):
     return render(request, 'history.html')
-def index(request):
+def fish_info(request):
     return render(request, 'fish_info.html')
-def index(request):
+def favorite(request):
     return render(request, 'favorite.html')
-def index(request):
+def edit_fish_check(request):
     return render(request, 'edit_fish_check.html')
-def index(request):
+def edit_fish(request):
+    return render(request, 'edit_fish.html')
+def base(request):
     return render(request, 'base.html')
-def index(request):
+def add_fish_check(request):
     return render(request, 'add_fish_check.html')
-def index(request):
+def add_fish(request):
     return render(request, 'add_fish.html')
 
 

@@ -7,12 +7,12 @@
         <h2>こんにちは、熱田さん</h2>
     </div>
     <section class="my_menu">
-        <a href="setting.php">ステータス</a>
+        <a href="{% url 'setting' %}">ステータス</a>
         <a href="{% url 'index' %}">ホーム</a>
-        <a href="">お気に入り</a>
-        <a href="add_fish.php">記事を投稿</a>
-        <a href="">自分の魚</a>
-        <a href="index.php">ログアウト</a>
+        <a href="{% url 'favorite' %}">お気に入り</a>
+        <a href="{% url 'add_fish' %}">記事を投稿</a>
+        <a href="{% url 'my_fish' %}">自分の魚</a>
+        <a href="{% url 'index' %}">ログアウト</a>
         <!--<div>閲覧履歴</div>-->
     </section>
 </main>

@@ -3,6 +3,7 @@ from . import views
 
 app_name = 'net_a'
 urlpatterns = [
+    path('sign_up_check', views.sign_up_check, name='sign_up_check'),
     path('sign_up', views.sign_up, name='sign_up'),
     path('sign_in', views.sign_in, name='sign_in'),
     path('setting', views.setting, name='setting'),
@@ -11,6 +12,7 @@ urlpatterns = [
     path('net_a_tutorial', views.net_a_tutorial, name='net_a_tutorial'),
     path('my_page/', views.my_page, name='my_page'),
     path('my_fish', views.my_fish, name='my_fish'),
+    path('', views.index, name='index'),
     path('history', views.history, name='history'),
     path('fish_info', views.fish_info, name='fish_info'),
     path('favorite', views.favorite, name='favorite'),
