@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<main>
+    <div class="menu">
+        <p>現在のNetaの魚種！〇〇種類</p>
+        <p>現在の合計投稿数！〇〇件</p>
+        <h2>人気の魚</h2>
+        <section class="slide_image">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+        </section>
+        <h2>最近の投稿</h2>
+        <section class="slide_image">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+        </section>
+        <h2>カテゴリーから探す</h2>
+        <section>
+            <h3>淡水魚</h3>
+            <div class="category">
+                <div>ポリプテルス</div>
+                <div>アロワナ</div>
+                <div>プレコ</div>
+                <div>パクー</div>
+                <div>カラシン(テトラなど)</div>
+                <div>プラティ・メダカなど</div>
+                <div>ローチ</div>
+                <div>エンゼルフィッシュ</div>
+                <div>ディスカス</div>
+                <div>シクリッド</div>
+                <div>コリドラス</div>
+                <div>キクラ</div>
+                <div>エイ</div>
+                <div>ベタ</div>
+                <div>ナマズ</div>
+                <div>フグ</div>
+                <div>エビ・貝・カニ</div>
+                <div>汽水魚</div>
+                <div>その他熱帯魚</div>
+                <div>金魚</div>
+                <div>鯉</div>
+                <div>その他淡水魚</div>
+            </div>
+            <h3>海水魚</h3>
+            <div class="category">
+                <div>ヤッコ</div>
+                <div>チョウチョウウオ</div>
+                <div>ハギ</div>
+                <div>スズメダイ</div>
+                <div>クマノミ</div>
+                <div>アジ</div>
+                <div>タイ</div>
+                <div>カレイ・ヒラメ</div>
+                <div>ベラ</div>
+                <div>ハゼ</div>
+                <div>ギンポ</div>
+                <div>ハタ</div>
+                <div>カサゴ</div>
+                <div>フグ</div>
+                <div>カワハギ</div>
+                <div>エイ・サメ</div>
+                <div>タコ・イカ</div>
+                <div>ウニ・ナマコ</div>
+                <div>クラゲ</div>
+                <div>エビ・貝・カニ（海）</div>
+                <div>その他海水魚</div>
+            </div>
+            <h3>魚の特徴</h3>
+            <div class="category">
+                <div>混泳が得意な魚</div>
+                <div>泳ぎが得意な魚</div>
+                <div>単独飼育推奨</div>
+                <div>小型魚</div>
+                <div>中型魚</div>
+                <div>大型魚</div>
+                <div>回遊魚・青魚</div>
+                <div>底もの</div>
+                <div>観賞魚</div>
+                <div>卵</div>
+                <div>幼魚</div>
+                <div>肉食魚</div>
+                <div>長細い魚</div>
+                <div>古代魚</div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!--スライドショーにslickを使う・ローカルだからhttp:を入れる-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="{% static 'js/slick/slick.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.slide_image').slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 4
+        });
+    });
+</script>
+{% endblock %}
