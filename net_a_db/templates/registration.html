@@ -3,10 +3,17 @@
 {% block content %}
 {% load static %}
 <main class="">
-    <h1>登録画面</h1>
+    <h2>登録画面</h2>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ user_form.as_p }}
+        <!--forで対応するモデルを関連付ける .id_for_label: Djangoフォームフィールドのメソッドで、そのフィールドに対応するHTML入力要素のIDを返します。このIDは、ラベルタグ(<label>)のfor属性と入力タグ(<input>, <textarea>など)のid属性とを一致させるために使われます。-->
+        <label for="{{user_form.username.id_for_label}}" class="form_input">{{ user_form.username.label }}</label>
+        {{ user_form.username }}
+        <label for="{{user_form.email.id_for_label}}" class="form_input">{{ user_form.email.label }}</label>
+        {{ user_form.email }}
+        <label for="{{user_form.password.id_for_label}}" class="form_input">{{ user_form.password.label }}</label>
+        {{ user_form.password }}
+
         {{ profile_form.as_p }}
         <input type="submit" value="登録">
     </form>

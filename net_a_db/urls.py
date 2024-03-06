@@ -15,6 +15,7 @@ urlpatterns = [
     path('my_fish', views.my_fish, name='my_fish'),
     path('', views.index, name='index'),
     path('history', views.history, name='history'),
+    path('genre_list', views.genre_list, name='genre_list'),
     path('fish_info', views.fish_info, name='fish_info'),
     path('favorite', views.favorite, name='favorite'),
     path('edit_fish_check', views.edit_fish_check, name='edit_fish_check'),

@@ -1,0 +1,7 @@
+ギットプッシュ
+cd /c/users/user/projects_portfolio/django_sample
+git clone <リポジトリのURL>
+git checkout -b <新しいブランチ名>
+git add .（特定のファイルをリモートリポジトリにプッシュgit add <ファイル名>）
+git commit -m "コミットメッセージ"
+git push origin <ブランチ名>

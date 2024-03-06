@@ -2,10 +2,13 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     website = models.URLField(blank=True)
     picture = models.FileField(upload_to='user/', blank=True)
+    # アイコンへの参照を追加
+    icon = models.ForeignKey('icon', default=1, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -67,6 +70,19 @@ class FishPhoto(models.Model):
     display_number = models.IntegerField()
     create_at = models.DateTimeField(default=timezone.datetime.now)
     update_at = models.DateTimeField(default=timezone.datetime.now)
+"""
+アップデートに伴う、アイコンの所持情報テーブル
+from django.conf import settings
+
+class UserIcon(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    icon = models.ForeignKey(Icon, on_delete=models.CASCADE)
+    obtained_at = models.DateTimeField(auto_now_add=True)  # アイコンを取得した日時
+    is_active = models.BooleanField(default=False)  # このアイコンが現在選択されているか
+
+    class Meta:
+        unique_together = ('user', 'icon')  # 同じアイコンを複数持たないようにする
+"""
 
 """
 ER図通りのIconの設定

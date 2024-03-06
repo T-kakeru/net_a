@@ -27,6 +27,8 @@ def index(request):
     return render(request, 'index.html')
 def history(request):
     return render(request, 'history.html')
+def genre_list(request):
+    return render(request, 'genre_list.html')
 def fish_info(request):
     return render(request, 'fish_info.html')
 def favorite(request):
@@ -50,9 +52,10 @@ def register(request):
     user_form = UserForm(request.POST or None)
     profile_form = ProfileForm(request.POST or None, request.FILES or None)
     if user_form.is_valid() and profile_form.is_valid():
-        user = user_form.save()
-        user.set_password(user.password)
-        user.save()
+        user = user_form.save(commit=False)# 一時的に保存を遅らせる
+        password = user_form.cleaned_data.get('password')# パスワードを取得
+        user.set_password(password)# パスワードをハッシュ化して設定
+        user.save()# ハッシュ化されたパスワードを持つユーザーを保存
         profile = profile_form.save(commit=False)
         profile.user = user
         profile.save()
