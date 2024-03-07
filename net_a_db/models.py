@@ -6,16 +6,16 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     website = models.URLField(blank=True)
-    picture = models.FileField(upload_to='user/', blank=True)
+    picture = models.FileField(upload_to='user/', null=True, blank=True)
     # アイコンへの参照を追加
-    icon = models.ForeignKey('icon', default=1, on_delete=models.SET_NULL, null=True, blank=True)
+    """icon = models.ForeignKey('icon', default=1, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return self.user.username
+        return self.user.username"""
 
 #テーブル定義
-class User(models.Model):
-    icon_id = models.ForeignKey(
+class UserInfo(models.Model):
+    icon = models.ForeignKey(
         'icon', default=1, on_delete=models.SET_DEFAULT)
     name = models.CharField(max_length=30)
     mail = models.EmailField(max_length=254, db_index=True)
@@ -24,34 +24,34 @@ class User(models.Model):
     update_at = models.DateTimeField(default=timezone.datetime.now)
 
 class FishInfo(models.Model):
-    user_id = models.ForeignKey(
-        'user', on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(
+        'userinfo', on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=50)
-    movie = models.FileField(upload_to='upload_video/')
-    info = models.TextField(max_length=1000)
-    gender = models.IntegerField(blank=True)
-    fish_mixed = models.CharField(max_length=200)
-    temp = models.IntegerField(blank=True)
-    fish_size = models.IntegerField(blank=True)
-    aquarium_size = models.IntegerField(blank=True)
-    material = models.CharField(max_length=200)
-    food = models.CharField(max_length=200)
+    movie = models.FileField(upload_to='upload_video/', null=True, blank=True)
+    info = models.TextField(max_length=1000, null=True, blank=True)
+    gender = models.IntegerField(null=True, blank=True)
+    fish_mixed = models.CharField(max_length=200, null=True, blank=True)
+    temp = models.IntegerField(null=True, blank=True)
+    fish_size = models.IntegerField(null=True, blank=True)
+    aquarium_size = models.IntegerField(null=True, blank=True)
+    material = models.CharField(max_length=200, null=True, blank=True)
+    food = models.CharField(max_length=200, null=True, blank=True)
     create_at = models.DateTimeField(default=timezone.datetime.now)
     update_at = models.DateTimeField(default=timezone.datetime.now)
 
 class Favorite(models.Model):
-    user_id = models.ForeignKey(
-        'user', on_delete=models.CASCADE)
-    fish_id = models.ForeignKey(
+    user = models.ForeignKey(
+        'userinfo', on_delete=models.CASCADE)
+    fish = models.ForeignKey(
         'fishinfo', on_delete=models.CASCADE)
     create_at = models.DateTimeField(default=timezone.datetime.now)
     update_at = models.DateTimeField(default=timezone.datetime.now)
 
 
 class History(models.Model):
-    user_id = models.ForeignKey(
-        'user', on_delete=models.CASCADE)
-    fish_id = models.ForeignKey(
+    user = models.ForeignKey(
+        'userinfo', on_delete=models.CASCADE)
+    fish = models.ForeignKey(
         'fishinfo', on_delete=models.CASCADE)
     create_at = models.DateTimeField(default=timezone.datetime.now)
     update_at = models.DateTimeField(default=timezone.datetime.now)
@@ -59,15 +59,15 @@ class History(models.Model):
 class Icon(models.Model):
     icon_file_name = models.ImageField(upload_to='icon_img/')
     icon_name = models.CharField(max_length=50)
-    icon_text = models.CharField(max_length=200, blank=True)#iconに新しくテキストを追加
+    icon_text = models.CharField(max_length=200, null=True, blank=True)#iconに新しくテキストを追加
     create_at = models.DateTimeField(default=timezone.datetime.now)
     update_at = models.DateTimeField(default=timezone.datetime.now)
 
 class FishPhoto(models.Model):
-    fish_info_id = models.ForeignKey(
-        'fishinfo', on_delete=models.CASCADE)
+    fish_info = models.ForeignKey(
+        'fishinfo', on_delete=models.CASCADE, default=1)
     fish_file_name = models.ImageField(upload_to='upload_img/')
-    display_number = models.IntegerField()
+    display_number = models.IntegerField(null=True, blank=True)
     create_at = models.DateTimeField(default=timezone.datetime.now)
     update_at = models.DateTimeField(default=timezone.datetime.now)
 """

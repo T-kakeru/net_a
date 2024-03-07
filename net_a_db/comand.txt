@@ -5,3 +5,12 @@ git checkout -b <新しいブランチ名>
 git add .（特定のファイルをリモートリポジトリにプッシュgit add <ファイル名>）
 git commit -m "コミットメッセージ"
 git push origin <ブランチ名>
+
+cd ./net_a
+conda activate sampleenv
+python manage.py runserver
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py createsuperuser

@@ -5,7 +5,7 @@ icon
 	updated_at
 
 user
-	(FK)icon_id
+	(FK)icon#icon_iｄから
 	name
 	mail
 	password

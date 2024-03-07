@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from net_a_db.forms import UserForm, ProfileForm, LoginForm
+from net_a_db.forms import UserForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
@@ -50,18 +50,20 @@ def base_root(request):
 
 def register(request):
     user_form = UserForm(request.POST or None)
-    profile_form = ProfileForm(request.POST or None, request.FILES or None)
-    if user_form.is_valid() and profile_form.is_valid():
+    #profile_form = ProfileForm(request.POST or None, request.FILES or None)
+    if user_form.is_valid():
         user = user_form.save(commit=False)# 一時的に保存を遅らせる
         password = user_form.cleaned_data.get('password')# パスワードを取得
         user.set_password(password)# パスワードをハッシュ化して設定
         user.save()# ハッシュ化されたパスワードを持つユーザーを保存
+        """
+        条件式に追加and profile_form.is_valid()
         profile = profile_form.save(commit=False)
         profile.user = user
-        profile.save()
+        profile.save()"""
     return render(request, 'registration.html', context={
         'user_form': user_form,
-        'profile_form': profile_form,
+        #'profile_form': profile_form,
     })
 
 def user_login(request):

@@ -1,7 +1,7 @@
 from typing import Any
 from django import forms
 from django.contrib.auth.models import User
-from net_a_db.models import Profile, Icon
+#from net_a_db.models import Profile, Icon
 
 class UserForm(forms.ModelForm):
     username = forms.CharField(label='名前')
@@ -12,7 +12,7 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password')
 
-class ProfileForm(forms.ModelForm):
+"""class ProfileForm(forms.ModelForm):
     website = forms.URLField(label='ホームページ')
     picture = forms.FileField(label='写真')
     
@@ -20,10 +20,10 @@ class ProfileForm(forms.ModelForm):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.fields['icon'].queryset = Icon.objects.all()
         # アイコンの選択肢を全てのアイコンに設定,アップデートで、同じユーザーが取得しているアイコンのみを表示させる場合Icon.objects.filter(usericon__user=user)
-    
     class Meta():
         model = Profile
         fields = ('website', 'picture', 'icon')
+"""
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='名前:', max_length=150)
