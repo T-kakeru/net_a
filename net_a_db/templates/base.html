@@ -27,15 +27,16 @@
             <div><input type="text" class="search_ber" width="10" height="30"></div>
         </div>
         <div>
-            <a href="{% url 'index' %}">ホーム</a>
-            <a href="{% url 'admin:index' %}">管理画面</a>
-        {% if user.is_authenticated %}
-            <a href="{% url 'user_logout' %}">ログアウト</a>
+            <a class="header_link" href="{% url 'admin:index' %}">管理画面</a>
+            <a class="header_link" href="{% url 'my_page' %}">マイページ</a>
+            {% if user.is_authenticated %}
+            <a class="header_link" href="{% url 'my_page' %}">マイページ</a>
+            <a class="header_link" href="{% url 'user_logout' %}">ログアウト</a>
         {% else %}
-            <a href="{% url 'register' %}">登録画面</a>
-            <a href="{% url 'user_login' %}">ログイン</a>
+            <a class="header_link" href="{% url 'register' %}">登録画面</a>
+            <a class="header_link" href="{% url 'user_login' %}">ログイン</a>
         {% endif %}
-            <a href="{% url 'info' %}">インフォメーション</a>
+            <a class="header_link" href="{% url 'info' %}">インフォメーション</a>
         </div>
         <!--<div class="search_right"></div>-->
     </div>
@@ -47,9 +48,9 @@
     <div class="footer">
         <div class="separator_line"></div>
         <div class="footer_menu">
-            <a href="description.php">NetAはどういうサイト？</a>
+            <a href="{% url 'net_a_tutorial' %}">NetAはどういうサイト？</a>
             <div>xxxxxxxx@neta.co.jp</div>
-            <a href="privacy.php">利用規約</a>
+            <a href="{% url 'privacy' %}">利用規約</a>
         </div>
     </div>
 </footer>

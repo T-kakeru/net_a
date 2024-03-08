@@ -1,13 +1,16 @@
 cd ./net_a
 conda activate sampleenv
 python manage.py runserver
+http://127.0.0.1:8000/
 
 python manage.py makemigrations
 python manage.py migrate
 
 python manage.py createsuperuser
 
-ギットプッシ
+
+
+ギットプッシュ
 cd /c/users/user/projects_portfolio/django_sample
 cd /c/users/kaker/projects_portfolio/django_sample/net_a
 git clone <リポジトリのURL>

@@ -26,7 +26,7 @@ class UserForm(forms.ModelForm):
 """
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label='名前:', max_length=150)
+    username = forms.CharField(label='名前', max_length=150)
     password = forms.CharField(label='パスワード', widget=forms.PasswordInput())
     confirm_password = forms.CharField(label='パスワード確認', widget=forms.PasswordInput())
     
