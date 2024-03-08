@@ -1,7 +1,20 @@
-ギットプッシュ
+ギットプッシ
 cd /c/users/user/projects_portfolio/django_sample
+cd /c/users/kaker/projects_portfolio/django_sample/net_a
 git clone <リポジトリのURL>
 git checkout -b <新しいブランチ名>
 git add .（特定のファイルをリモートリポジトリにプッシュgit add <ファイル名>）
 git commit -m "コミットメッセージ"
 git push origin <ブランチ名>
+git log
+ギットプル
+
+ギットマージ
+git add .
+git commit -m "マージ前のコミットメッセージ"
+・git stash (これは、後で再適用するか、または現在の作業を一時的に取り除く必要がある場合に行います)
+    git marge origin/main
+    git pop(ここでコンフリクトが起こる可能性がある)
+・git fetch origin
+    git marge origin/main
+
