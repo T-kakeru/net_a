@@ -82,13 +82,29 @@ header{
     z-index: 999;
 }
 
-
 /*動的css、フォーム*/
+.form {
+    display: flex; /* フレックスボックスコンテナとして設定 */
+    flex-direction: column; /* 子要素を縦方向に並べる */
+    align-items: flex-start; /* 子要素をコンテナの開始側（左側）に揃える */
+    gap: 10px; /* 子要素の間に10pxの隙間を設ける */
+}
+
+.form_menu{
+    margin-top: 10px;
+    display: flex;
+    width: 340px;
+    align-items: flex-start;
+}
+
 .form_input {
     color: rgb(1, 0, 88);/* CSSプロパティ */
-    width: 150px;
-    padding-left: 30px;
+    padding-left: 20px;
+    display: flex;
+    width: 170px;
+    align-items: flex-start;
 }
+
 
 /*メイン ホーム*/
 main{

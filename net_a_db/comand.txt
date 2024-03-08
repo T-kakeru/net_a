@@ -1,3 +1,12 @@
+cd ./net_a
+conda activate sampleenv
+python manage.py runserver
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py createsuperuser
+
 ギットプッシ
 cd /c/users/user/projects_portfolio/django_sample
 cd /c/users/kaker/projects_portfolio/django_sample/net_a
@@ -13,8 +22,9 @@ git log
 git add .
 git commit -m "マージ前のコミットメッセージ"
 ・git stash (これは、後で再適用するか、または現在の作業を一時的に取り除く必要がある場合に行います)
-    git marge origin/main
+    git merge origin/main
     git pop(ここでコンフリクトが起こる可能性がある)
 ・git fetch origin
-    git marge origin/main
+    git merge origin/main
+
 
