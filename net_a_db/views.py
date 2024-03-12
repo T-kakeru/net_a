@@ -1,8 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from net_a_db.forms import UserForm, LoginForm
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def sign_up_check(request):
@@ -48,6 +45,11 @@ def registration(request):
 def base_root(request):
     return render(request, 'base_root.html')
 
+
+from net_a_db.forms import UserForm, LoginForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
 def register(request):
     user_form = UserForm(request.POST or None)
     #profile_form = ProfileForm(request.POST or None, request.FILES or None)
@@ -70,7 +72,7 @@ def user_login(request):
     login_form = LoginForm(request.POST or None)
     if login_form.is_valid():
         username = login_form.cleaned_data.get('username')
-        password = login_form.changed_data.get('password')
+        password = login_form.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         #ユーザーが存在するか、パスワードがあっているか
         if user:
@@ -94,6 +96,23 @@ def user_logout(request):
 def info(request):
     return HttpResponse('ログインしています')
 
+from .models import FishInfo
+
+
+def index(request):
+    fish_infos = FishInfo.objects.all()  # すべての FishInfo レコードを取得
+    return render(request, 'index.html', {'fish_infos': fish_infos})
+
+def fish_info(request, fish_info_id):
+    fish_info = get_object_or_404(FishInfo, pk=fish_info_id)
+    return render(request, 'fish_info.html', {'fish_info': fish_info})
+
+"""
+from .models import FishInfo
+def fish_info(request):
+    fish_infos = FishInfo.objects.filter(id=1).all()  # すべての FishInfo レコードを取得
+    return render(request, 'fish_info.html', {'fish_infos': fish_infos})
+"""
 """
 オブジェクト化したい
 for page in pages:

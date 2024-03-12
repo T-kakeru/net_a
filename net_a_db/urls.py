@@ -1,6 +1,9 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
+from .views import index, fish_info
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,10 +16,8 @@ urlpatterns = [
     path('net_a_tutorial', views.net_a_tutorial, name='net_a_tutorial'),
     path('my_page/', views.my_page, name='my_page'),
     path('my_fish', views.my_fish, name='my_fish'),
-    path('', views.index, name='index'),
     path('history', views.history, name='history'),
     path('genre_list', views.genre_list, name='genre_list'),
-    path('fish_info', views.fish_info, name='fish_info'),
     path('favorite', views.favorite, name='favorite'),
     path('edit_fish_check', views.edit_fish_check, name='edit_fish_check'),
     path('edit_fish', views.edit_fish, name='edit_fish'),
@@ -29,4 +30,7 @@ urlpatterns = [
     path('user_login', views.user_login, name='user_login'),
     path('user_logout', views.user_logout, name='user_logout'),
     path('info', views.info, name='info'),
-]
+
+    path('', index, name='index'),
+    path('fish-info/<int:fish_info_id>/', fish_info, name='fish_info'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

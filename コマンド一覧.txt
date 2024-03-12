@@ -8,18 +8,17 @@ python manage.py migrate
 
 python manage.py createsuperuser
 
-
-
-ギットプッシュ
+ギットプッシュhttps://github.com/T-kakeru/net_a.git
 cd /c/users/user/projects_portfolio/django_sample
 cd /c/users/kaker/projects_portfolio/django_sample/net_a
 git clone <リポジトリのURL>
-git checkout -b <新しいブランチ名>
+git checkout -b <新しいブランチ名>main
 git add .（特定のファイルをリモートリポジトリにプッシュgit add <ファイル名>）
 git commit -m "コミットメッセージ"
 git push origin <ブランチ名>
 git log
 ギットプル
+git pull origin <新しいブランチ名>main
 
 ギットマージ
 git add .
@@ -30,4 +29,9 @@ git commit -m "マージ前のコミットメッセージ"
 ・git fetch origin
     git merge origin/main
 
+アルゴン２エラー
+pip install argon2-cffi
 
+検索画面消したい
+
+絞り込み機能

@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
 
@@ -25,11 +26,15 @@ class UserInfo(models.Model):
 
 class FishInfo(models.Model):
     user = models.ForeignKey(
-        'userinfo', on_delete=models.SET_NULL, null=True)
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=50)
+    #previewのカラムを追加
+    preview = models.ImageField(upload_to='upload_img/', null=True, blank=True)
     movie = models.FileField(upload_to='upload_video/', null=True, blank=True)
     info = models.TextField(max_length=1000, null=True, blank=True)
     gender = models.IntegerField(null=True, blank=True)
+    #categoryのカラムを追加
+    category = models.CharField(max_length=20, null=True, blank=True)
     fish_mixed = models.CharField(max_length=200, null=True, blank=True)
     temp = models.IntegerField(null=True, blank=True)
     fish_size = models.IntegerField(null=True, blank=True)
@@ -68,6 +73,16 @@ class FishPhoto(models.Model):
         'fishinfo', on_delete=models.CASCADE, default=1)
     fish_file_name = models.ImageField(upload_to='upload_img/')
     display_number = models.IntegerField(null=True, blank=True)
+    create_at = models.DateTimeField(default=timezone.datetime.now)
+    update_at = models.DateTimeField(default=timezone.datetime.now)
+
+#下記テーブルの追加、ユーザー情報にIcon情報を入れられないため
+class Icon_items(models.Model):
+    icon = models.ForeignKey(
+        'icon', on_delete=models.CASCADE)
+    fish_info = models.ForeignKey(
+        'fishinfo', on_delete=models.CASCADE)
+    icon_set = models.IntegerField(default=0, null=True, blank=True)
     create_at = models.DateTimeField(default=timezone.datetime.now)
     update_at = models.DateTimeField(default=timezone.datetime.now)
 """

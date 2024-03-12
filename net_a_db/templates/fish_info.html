@@ -3,6 +3,42 @@
 {% block content %}
 {% load static %}
 <main class="">
-
+    <h2>データベース上にある魚の情報</h2>
+    <div>
+        <img src="{{ fish_info.preview.url }}" width="50%" max-width="500px">
+            
+        <div class="fish_info">
+        <table>
+            {{ fish_info.movie }}
+            <tr>
+                <th>名前</th><td>{{ fish_info.name }}</td>
+            </tr>
+            <tr>
+                <th>飼育情報</th><td>{{ fish_info.info }}</td>
+            </tr>
+            <tr>
+                <th>性別</th><td>{{ fish_info.gender }}</td>
+            </tr>
+            <tr>
+                <th>カテゴリー</th><td>{{ fish_info.category }}</td>
+            </tr>
+            <tr>
+                <th>混泳（一緒に住んでいる魚）</th><td>{{ fish_info.fish_mixed }}</td>
+            </tr>
+            <tr>
+                <th>飼育温度</th><td>{{ fish_info.temp }}</td>
+            </tr>
+            <tr>
+                <th>水槽のサイズ</th><td>{{ fish_info.aquarium_size }}</td>
+            </tr>
+            <tr>
+                <th>材料</th><td>{{ fish_info.material }}</td>
+            </tr>
+            <tr>
+                <th>あげている餌</th><td>{{ fish_info.food }}</td>
+            </tr>
+        </table>
+    </div>
 </main>
 {% endblock %}
+

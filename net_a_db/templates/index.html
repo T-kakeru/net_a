@@ -4,32 +4,63 @@
 {% load static %}
 <main>
     <div class="menu">
-        <p>現在のNetaの魚種！〇〇種類</p>
+    <!--<p>現在のNetaの魚種！〇〇種類</p>
         <p>現在の合計投稿数！〇〇件</p>
+    -->
         <h2>人気の魚</h2>
         <section class="slide_image">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+        {% for fish_info in fish_infos %}
+            <a href="{% url 'fish_info' fish_info.id %}">
+            {% if fish_info.preview %}            
+                <div class="slide_image_item">
+                    <div>
+                        <div>{{ fish_info.name }}</div>
+                        <img src="{{ fish_info.preview.url }}" alt="{{ fish_info.name }}" width="100%">
+                    </div>
+                </div>
+            {% else %}
+                {{ fish_info.name }}の画像はありません</div>
+            {% endif %}
+            </a>
+        {% endfor %}
         </section>
-        <h2>最近の投稿</h2>
+
+        <h2>最新の投稿</h2>
         <section class="slide_image">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
-            <img src="{% static 'img/logo1.jpg' %}" alt="ロゴ" width="300" height="200">
+            {% for fish_info in fish_infos %}
+                <a href="{% url 'fish_info' fish_info.id %}">
+                {% if fish_info.preview %}            
+                    <div class="slide_image_item">
+                        <div>
+                            <div>{{ fish_info.name }}</div>
+                            <img src="{{ fish_info.preview.url }}" alt="{{ fish_info.name }}" width="100%">
+                        </div>
+                    </div>
+                {% else %}
+                    {{ fish_info.name }}の画像はありません</div>
+                {% endif %}
+                </a>
+            {% endfor %}
         </section>
+
+        <h2>珍しい魚</h2>
+        <section class="slide_image">
+            {% for fish_info in fish_infos %}
+                <a href="{% url 'fish_info' fish_info.id %}">
+                {% if fish_info.preview %}            
+                    <div class="slide_image_item">
+                        <div>
+                            <div>{{ fish_info.name }}</div>
+                            <img src="{{ fish_info.preview.url }}" alt="{{ fish_info.name }}" width="100%">
+                        </div>
+                    </div>
+                {% else %}
+                    {{ fish_info.name }}の画像はありません</div>
+                {% endif %}
+                </a>
+            {% endfor %}
+        </section>
+
         <h2>カテゴリーから探す</h2>
         <section>
             <h3>淡水魚</h3>
@@ -81,7 +112,7 @@
                 <div>エビ・貝・カニ（海）</div>
                 <div>その他海水魚</div>
             </div>
-            <h3>魚の特徴</h3>
+            <!--<h3>魚の特徴</h3>
             <div class="category">
                 <div>混泳が得意な魚</div>
                 <div>泳ぎが得意な魚</div>
@@ -97,7 +128,7 @@
                 <div>肉食魚</div>
                 <div>長細い魚</div>
                 <div>古代魚</div>
-            </div>
+            </div>-->
         </section>
     </div>
 </main>

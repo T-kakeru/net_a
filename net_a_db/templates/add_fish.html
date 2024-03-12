@@ -5,6 +5,13 @@
 <main id="setting">
 <section>
     <h2>飼っている魚・近くの魚を投稿</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <button type="submit">送信</button>
+    </form>
     <table>
         <tbody>
         <tr>

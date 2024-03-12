@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="sanitize" type="text/css" href="{% static 'css/sanitize.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <!--スライドショーにslickを使う-->
     <link rel="stylesheet" href="{% static 'js/slick/slick.css' %}">
     <link rel="stylesheet" href="{% static 'js/slick/slick-theme.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <title>NetA</title>
 </head>
 <header>
@@ -18,27 +18,18 @@
             <a href="{% url 'net_a_tutorial' %}"><img class="logo" src="{% static 'img/logo.PNG' %}" alt="ロゴ"></a>
             <div class="header_space center_space"></div>
             <!--アイコン,my_page.htmlへ-->
-            <a href="{% url 'index' %}">ホ</a>
-            <a href="{% url 'my_page' %}"><img src="{% static 'img/icon1.PNG' %}" class="icon" alt="アイコン"></a>
+                <a href="{% url 'index' %}"><img src="{% static 'img/home.PNG' %}" class="home" alt="ホーム"></a>
+                {% if user.is_authenticated %}
+                    <a class="header_link" href="{% url 'my_page' %}">
+                        <img src="{% static 'img/icon1.PNG' %}" class="icon" alt="アイコン">
+                    </a>
+                {% else %}
+                    <a class="header_link" href="{% url 'user_login' %}">
+                        <img src="{% static 'img/test.jpg' %}" class="home" alt="ホーム">
+                    </a>
+                {% endif %}
             <div class="header_space"></div>
         </div>
-        <div class="search_menu">
-            <div><input type="button" value="絞り込み" class="search_filter" width="150" height="30"></div>
-            <div><input type="text" class="search_ber" width="10" height="30"></div>
-        </div>
-        <div>
-            <a class="header_link" href="{% url 'admin:index' %}">管理画面</a>
-            <a class="header_link" href="{% url 'my_page' %}">マイページ</a>
-            {% if user.is_authenticated %}
-            <a class="header_link" href="{% url 'my_page' %}">マイページ</a>
-            <a class="header_link" href="{% url 'user_logout' %}">ログアウト</a>
-        {% else %}
-            <a class="header_link" href="{% url 'register' %}">登録画面</a>
-            <a class="header_link" href="{% url 'user_login' %}">ログイン</a>
-        {% endif %}
-            <a class="header_link" href="{% url 'info' %}">インフォメーション</a>
-        </div>
-        <!--<div class="search_right"></div>-->
     </div>
     <div class="separator_line"></div>
 </header>
