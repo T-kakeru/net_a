@@ -17,7 +17,7 @@
         <div class="header_flex_image">
             <a href="{% url 'net_a_tutorial' %}"><img class="logo" src="{% static 'img/logo.PNG' %}" alt="ロゴ"></a>
             <div class="header_space center_space"></div>
-            <!--アイコン,my_page.htmlへ-->
+                <a href="{% url 'search' %}">検索</a>
                 <a href="{% url 'index' %}"><img src="{% static 'img/home.PNG' %}" class="home" alt="ホーム"></a>
                 {% if user.is_authenticated %}
                     <a class="header_link" href="{% url 'my_page' %}">

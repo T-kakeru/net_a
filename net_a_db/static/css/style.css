@@ -54,14 +54,14 @@ header{
 
 .icon{
     margin-left: 10px;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
 }
 
 .home{
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
 }
 
 .search_menu{
@@ -185,6 +185,45 @@ h2, h3{
     font-family: sans-serif;
     font-weight: 600;
     color: #ffffff;
+}
+
+.list_image_box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; 
+    
+}
+
+.list_image_item {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden; /* はみ出した画像を非表示にする */
+    background-color: rgb(23, 23, 23); /* 親要素の背景色を設定（任意） */
+    aspect-ratio: 1 / 0.8; /* 縦横比を1:1に保持 */
+  }
+
+.list_image_item div {
+    object-fit: cover; /* 縦横比を保ちながら親要素いっぱいに表示 */
+    object-position: center; /* 画像を中央に配置 */
+}
+
+.list_image_item div{
+    font-size: 12px;
+    margin-top: 2px;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.search_help {
+    font-size: 10px;
+    color: #454545;
+}
+
+th {
+    text-align: left; /* thタグ内のテキストを左寄せにする */
 }
 
 .category {
@@ -360,9 +399,17 @@ h2, h3{
     h3 {
         font-size: 15px;
     }
-    
+
     .slide_image_item div{
         font-size: 7px;
+    }
+
+    .list_image_item {
+        width: 80px;
+    }
+    
+    .list_image_item div{
+        font-size: 5px;
     }
 
     .category div{

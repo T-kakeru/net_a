@@ -3,11 +3,17 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    website = models.URLField(blank=True)
+    icon = models.ForeignKey(
+        'icon', default=1, on_delete=models.SET_DEFAULT)
+    website = models.URLField(null=True, blank=True)
     picture = models.FileField(upload_to='user/', null=True, blank=True)
+
+    
+class UserProfile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    icon = models.ForeignKey('Icon', default=1, on_delete=models.SET_DEFAULT)
     # アイコンへの参照を追加
     """icon = models.ForeignKey('icon', default=1, on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -26,7 +32,7 @@ class UserInfo(models.Model):
 
 class FishInfo(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+        User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=50)
     #previewのカラムを追加
     preview = models.ImageField(upload_to='upload_img/', null=True, blank=True)
@@ -36,26 +42,31 @@ class FishInfo(models.Model):
     #categoryのカラムを追加
     category = models.CharField(max_length=20, null=True, blank=True)
     fish_mixed = models.CharField(max_length=200, null=True, blank=True)
-    temp = models.IntegerField(null=True, blank=True)
+    temp = models.CharField(max_length=20, null=True, blank=True)
     fish_size = models.IntegerField(null=True, blank=True)
-    aquarium_size = models.IntegerField(null=True, blank=True)
+    aquarium_size = models.CharField(max_length=20, null=True, blank=True)
     material = models.CharField(max_length=200, null=True, blank=True)
     food = models.CharField(max_length=200, null=True, blank=True)
+    #goodのカラムを追加
+    good = models.IntegerField(null=True, blank=True)
     create_at = models.DateTimeField(default=timezone.datetime.now)
     update_at = models.DateTimeField(default=timezone.datetime.now)
 
 class Favorite(models.Model):
     user = models.ForeignKey(
-        'userinfo', on_delete=models.CASCADE)
+        User, on_delete=models.CASCADE)
     fish = models.ForeignKey(
         'fishinfo', on_delete=models.CASCADE)
     create_at = models.DateTimeField(default=timezone.datetime.now)
     update_at = models.DateTimeField(default=timezone.datetime.now)
+    #Metaクラスを追加
+    class Meta:
+        unique_together = ('user', 'fish') 
 
 
 class History(models.Model):
     user = models.ForeignKey(
-        'userinfo', on_delete=models.CASCADE)
+        User, on_delete=models.CASCADE)
     fish = models.ForeignKey(
         'fishinfo', on_delete=models.CASCADE)
     create_at = models.DateTimeField(default=timezone.datetime.now)

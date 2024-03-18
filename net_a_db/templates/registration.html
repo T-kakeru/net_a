@@ -6,27 +6,45 @@
     <h2>登録画面</h2>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <!--forで対応するモデルを関連付ける .id_for_label: Djangoフォームフィールドのメソッドで、そのフィールドに対応するHTML入力要素のIDを返します。このIDは、ラベルタグ(<label>)のfor属性と入力タグ(<input>, <textarea>など)のid属性とを一致させるために使われます。-->
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        {% if user_form.errors %}
+            <div class="alert alert-danger">
+                <strong>User Form Errors:</strong>
+                {{ user_form.errors }}
+            </div>
+        {% endif %}
+        {% if profile_form.errors %}
+            <div class="alert alert-danger">
+                <strong>Profile Form Errors:</strong>
+                {{ profile_form.errors }}
+            </div>
+        {% endif %}
+        <button type="submit">登録</button>
+    </form>
+    <!--form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form_group">
+            <label for="{{ form.icon.id_for_label }}">アイコン:</label>
+            {{ profile_form.icon }}
+        </div>
         <div class="form_menu">
-            <label for="{{user_form.username.id_for_label}}" class="form_input">{{ user_form.username.label }}</label>
+            <label for="{{ user_form.username.id_for_label }}" class="form_input">{{ user_form.username.label }}</label>
             {{ user_form.username }}
         </div>
         <div class="form_menu">
-            <label for="{{user_form.email.id_for_label}}" class="form_input">{{ user_form.email.label }}</label>
+            <label for="{{ user_form.email.id_for_label }}" class="form_input">{{ user_form.email.label }}</label>
             {{ user_form.email }}
         </div>
         <div class="form_menu">
-            <label for="{{user_form.password.id_for_label}}" class="form_input">{{ user_form.password.label }}</label>
-            {{ user_form.password }}
+            <label for="{{ user_form.password.id_for_label }}" class="form_input">{{ user_form.password1.label }}</label>
+            {{ user_form.password1 }}
         </div>
-<!--
         <div class="form_menu">
-            <label for="{{profile_form.icon.id_for_label}}" class="form_input">{{ profile_form.icon.label }}</label>
-            {{ profile_form.icon }}
+            <label for="{{ user_form.password_confirm.id_for_label }}" class="form_input">{{ user_form.password2.label }}</label>
+            {{ user_form.password2 }}
         </div>
-        {{ profile_form.as_p }}写真とウェブサイトの表示
-        あとはちゃんとデータベースで塗るを許可してね-->
         <div class="form_menu"><input type="submit" class="button_css" value="登録"></div>
-    </form>
+    </form>     -->
 </main>
 {% endblock %}

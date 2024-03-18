@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import index, fish_info
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('tag_list', views.tag_list, name='tag_list'),
     path('sign_up_check', views.sign_up_check, name='sign_up_check'),
     path('sign_up', views.sign_up, name='sign_up'),
     path('sign_in', views.sign_in, name='sign_in'),
@@ -18,7 +18,7 @@ urlpatterns = [
     path('my_fish', views.my_fish, name='my_fish'),
     path('history', views.history, name='history'),
     path('genre_list', views.genre_list, name='genre_list'),
-    path('favorite', views.favorite, name='favorite'),
+    path('favorite_list', views.favorite_list, name='favorite_list'),
     path('edit_fish_check', views.edit_fish_check, name='edit_fish_check'),
     path('edit_fish', views.edit_fish, name='edit_fish'),
     path('base', views.base, name='base'),
@@ -31,6 +31,11 @@ urlpatterns = [
     path('user_logout', views.user_logout, name='user_logout'),
     path('info', views.info, name='info'),
 
-    path('', index, name='index'),
-    path('fish-info/<int:fish_info_id>/', fish_info, name='fish_info'),
+    path('', views.index, name='index'),
+    path('fish_info/<int:fish_info_id>/', views.fish_info, name='fish_info'),
+    path('genre_list/<int:genre_id>/', views.genre, name='genre'),
+    path('favorite_toggle/<int:fish_info_id>/', views.favorite_toggle, name='favorite_toggle'),
+    path('search/results/', views.search_results, name='search_results'),
+    path('search/', views.search_fish_info, name='search_fish_info'),
+    path('add_fish', views.add_fish, name='add_fish'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,16 +1,27 @@
 from typing import Any
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from .models import FishInfo, Icon, UserProfile
 #from net_a_db.models import Profile, Icon
 
-class UserForm(forms.ModelForm):
-    username = forms.CharField(label='名前')
-    email = forms.EmailField(label='メールアドレス')
-    password = forms.CharField(label='パスワード', widget=forms.PasswordInput())
-    
-    class Meta():
+#新規登録
+class UserForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
         model = User
-        fields = ('username', 'email', 'password')
+        fields = ("username", "email", "password1", "password2")
+
+#新規登録アイコン用
+class ProfileForm(forms.ModelForm):
+    icon = forms.ModelChoiceField(queryset=Icon.objects.all(), label='アイコン', required=False)
+
+    class Meta:
+        model = UserProfile
+        fields = ('icon',)
+
+
 
 """class ProfileForm(forms.ModelForm):
     website = forms.URLField(label='ホームページ')
@@ -31,17 +42,16 @@ class LoginForm(forms.Form):
 
 from django import forms
 from django.conf import settings
-from .models import FishInfo
 
 class FishInfoForm(forms.ModelForm):
     GENDER_CHOICES = [
-        (1, '選択してください'),
-        (2, 'オス'),
-        (3, 'メス'),
+        (None, '選択してください'),
+        (1, 'オス'),
+        (2, 'メス'),
     ]
 
     CATEGORY_CHOICES = [
-        (1, '選択してください'),
+        (1, ''),
         (2, 'アロワナ'),
         (3, 'ポリプテルス'),
         (4, 'プレコ'),
@@ -82,22 +92,57 @@ class FishInfoForm(forms.ModelForm):
         (39, 'その他海水魚'),
     ]
 
-    gender = forms.ChoiceField(choices=GENDER_CHOICES, label="性別", required=False)
+    TEMP_CHOICES = [
+        (None, ''),
+        (1, '10'),
+        (2, '14'),
+        (3, '17'),
+        (4, '20'),
+        (5, '22'),
+        (6, '24'),
+        (7, '25'),
+        (8, '26'),
+        (9, '27'),
+        (10, '28'),
+        (11, '29'),
+        (12, '30'),
+        (13, '31'),
+        (14, '33'),
+    ]
+    
+    AQUARIUM_SIZE_CHOICES = [
+        (None, ''),
+        (1, '20'),
+        (2, '30'),
+        (3, '45'),
+        (4, '60'),
+        (5, '70'),
+        (6, '90'),
+        (7, '100'),
+        (8, '120'),
+        (9, '150'),
+        (10, '180'),
+        (10, '200'),
+        (11, '240'),
+        (12, '300'),
+        (13, '400'),
+        (14, '500'),
+    ]
+
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '魚の名前'}), label="名前")
+    preview = forms.ImageField(label="プレビュー画像", required=False)
+    movie = forms.FileField(label="動画", required=False)
+    info = forms.CharField(widget=forms.Textarea(attrs={'placeholder': '飼育情報'}), label="飼育情報", required=False)
+    gender = forms.ChoiceField(choices=GENDER_CHOICES, label="性別", widget=forms.RadioSelect, required=False)
     category = forms.ChoiceField(choices=CATEGORY_CHOICES, label="カテゴリー", required=False)
+    fish_mixed = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '混泳可能な魚'}), label="混泳情報", required=False)
+    temp = forms.ChoiceField(choices=TEMP_CHOICES, label="適正温度", required=False)
+    fish_size = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': '魚のサイズ'}), label="魚のサイズ", required=False)
+    aquarium_size = forms.ChoiceField(choices=AQUARIUM_SIZE_CHOICES, label="水槽サイズ", required=False)
+    material = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'レイアウトの情報や、使用器具'}), label="レイアウト情報", required=False)
+    food = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '餌'}), label="餌", required=False)
 
     class Meta:
         model = FishInfo
         fields = ['name', 'preview', 'movie', 'info', 'gender', 'category', 
-                    'fish_mixed', 'temp', 'fish_size', 'aquarium_size', 'material', 'food']
-        widgets = {
-            'name': forms.TextInput(attrs={'placeholder': '魚の名前'}),
-            'info': forms.Textarea(attrs={'placeholder': '飼育情報'}),
-            'category': forms.TextInput(attrs={'placeholder': 'カテゴリ'}),
-            'fish_mixed': forms.TextInput(attrs={'placeholder': '混泳可能な魚'}),
-            'temp': forms.NumberInput(attrs={'placeholder': '適正温度'}),
-            'fish_size': forms.NumberInput(attrs={'placeholder': '魚のサイズ'}),
-            'aquarium_size': forms.NumberInput(attrs={'placeholder': '飼育水槽サイズ'}),
-            'material': forms.TextInput(attrs={'placeholder': 'レイアウトの情報や、使用器具'}),
-            #レイアウトは別テーブル用意？
-            'food': forms.TextInput(attrs={'placeholder': '餌'}),
-        }
+                  'fish_mixed', 'temp', 'fish_size', 'aquarium_size', 'material', 'food']
