@@ -61,7 +61,7 @@ def register(request):
             profile.user = user
             profile.save()
             login(request, user)  # ユーザーをログインさせる
-            return redirect('my_page')
+            return redirect('net_a_tutorial')
     else:
         user_form = UserForm()
         profile_form = ProfileForm()
@@ -88,7 +88,7 @@ def user_login(request):
 
 
 from .forms import FishInfoForm
-from .models import FishInfo
+from .models import FishInfo, Profile
 
 def add_fish(request):
         fish_info_form = FishInfoForm(request.POST, request.FILES)
@@ -98,6 +98,12 @@ def add_fish(request):
 
         return render(request, 'add_fish.html', {'fish_info_form': fish_info_form})
 
+"""def user_profile(request):
+    user_profile_instance = request.user
+    if request.user:
+        user_profile_instance = Profile.objects.filter(user=request.user).all()
+    return {'user_profile': user_profile_instance}"""
+
 @login_required
 def user_logout(request):
     logout(request)
@@ -106,8 +112,6 @@ def user_logout(request):
 @login_required
 def info(request):
     return HttpResponse('ログインしています')
-
-from .models import FishInfo
 
 #indexの色々な情報を表示
 def index(request):

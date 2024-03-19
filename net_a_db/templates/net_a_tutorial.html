@@ -2,7 +2,12 @@
 
 {% block content %}
 {% load static %}
-<main class="">
+<main id="tutorial">
+    <div class="tutorial_end_box">
+        <div class="tutorial_end_item">
+            <a href="{% url 'index' %}"><div class="close-button">✕</div></a>
+        </div>
+    </div>
     <h1>Netaとは</h1>
     <p><span>Neta</span><span>(ねった)</span>とは、<span>ねった</span>いぎょへの理解を深め、
         <span>Net</span>で<span>a</span>quariumライフを充実させるために作られたアプリです。</p>

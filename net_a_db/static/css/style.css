@@ -8,12 +8,38 @@ body *{
     box-sizing: border-box;
     text-decoration: none;
     color: black;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family:serif, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 main {
     min-height: 100vh;
-    background-color:#f0fbff
+    background-color:#f0fbff;
+    padding-top: 20px;
+    z-index: 5;
+}
+
+table {
+    font-weight: normal;
+    text-align: start;
+}
+
+th, td {
+    text-align: left; /* thタグ内のテキストを左寄せにする */
+    padding: 10px;
+    color: rgb(1, 0, 88);/* CSSプロパティ */
+}
+
+th {
+    width: 180px;
+}
+
+td {
+    font-family: sans-serif;
+}
+
+h2, h3{
+    margin-left: 10px;
+    font-family: fantasy;
 }
 
 
@@ -121,19 +147,12 @@ header{
     align-items: flex-start;
 }
 
-.form_input {
-    color: rgb(1, 0, 88);/* CSSプロパティ */
-    padding-left: 20px;
-    display: flex;
-    width: 170px;
-    align-items: flex-start;
-}
-
 .button_css{
     width:100px;
     height: 40px;
     margin-top: 20px;
     margin-left: 100px;
+    margin-bottom: 20px;
     background-color: #67a7e2;
     border: none;
     color: #ffffff;
@@ -148,21 +167,60 @@ header{
     color: #ffffff;
 }
 
-.p{
-    font-size: 20px;
+.register_link{
+    margin-left: 40px;
+    padding-top: 20px;
 }
 
 .login_name{
     font-size: 32px;
 }
 
+
 /*メイン ホーム*/
-main{
-    z-index: 5;
+.add_user_help{
+    color: #726f6f;
+    font-size: 8px;
+    padding-top: 0;
+    padding-bottom: 20px;
 }
 
-h2, h3{
-    margin-left: 10px;
+.add_user_help_indent{
+    padding-bottom: 5px;
+}
+
+#tutorial{
+    text-align: center;
+    padding-left: 40px;
+}
+
+.tutorial_end_box{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.tutorial_end_item .close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px; /* 幅を設定 */
+    height: 50px; /* 高さを設定 */
+    padding: 0;
+    margin: 30px;
+    background-image: linear-gradient(135deg, #d69c9c, #ff1722); /* グラデーションの背景 */
+    color: #ffffff;
+    font-size: 24px; /* 文字サイズを大きく */
+    font-weight: bold;
+    text-align: center;
+    border-radius: 50%; /* 完全な円形 */
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.tutorial_end_item .close-button:hover {
+    background-image: linear-gradient(135deg, #f38f8f, #ee8585);
 }
 
 .slide_image_item {
@@ -172,7 +230,7 @@ h2, h3{
     overflow: hidden; /* はみ出した画像を非表示にする */
     background-color: rgb(23, 23, 23); /* 親要素の背景色を設定（任意） */
     aspect-ratio: 1 / 0.8; /* 縦横比を1:1に保持 */
-  }
+}
 
 .slide_image_item div {
     object-fit: cover; /* 縦横比を保ちながら親要素いっぱいに表示 */
@@ -202,7 +260,7 @@ h2, h3{
     overflow: hidden; /* はみ出した画像を非表示にする */
     background-color: rgb(23, 23, 23); /* 親要素の背景色を設定（任意） */
     aspect-ratio: 1 / 0.8; /* 縦横比を1:1に保持 */
-  }
+}
 
 .list_image_item div {
     object-fit: cover; /* 縦横比を保ちながら親要素いっぱいに表示 */
@@ -220,10 +278,6 @@ h2, h3{
 .search_help {
     font-size: 10px;
     color: #454545;
-}
-
-th {
-    text-align: left; /* thタグ内のテキストを左寄せにする */
 }
 
 .category {
@@ -389,6 +443,10 @@ th {
 
     .search_left {
         display: contents;
+    }
+
+    .add_user_help{
+        font-size: 6px;
     }
 
     /*mein*/

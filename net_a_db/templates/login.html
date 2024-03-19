@@ -6,17 +6,19 @@
     <h2>ログイン画面</h2>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="form_menu">
-            <label for="{{login_form.username.id_for_label}}" class="form_input">{{ login_form.username.label }}</label>
-            {{ login_form.username }}
-        </div>
-        <div class="form_menu">
-            <label for="{{login_form.password.id_for_label}}" class="form_input">{{ login_form.password.label }}</label>
-            {{ login_form.password }}
-        </div>
+        <table>
+            <tr>
+                <th><label for="{{login_form.username.id_for_label}}" class="form_input">{{ login_form.username.label }}</label></th>
+                <td>{{ login_form.username }}</td>
+            </tr>
+            <tr>
+                <th><label for="{{login_form.password.id_for_label}}" class="form_input">{{ login_form.password.label }}</label></th>
+                <td>{{ login_form.password }}</td>
+            </tr>
+        </table>
         <!--{{ login_form.as_p }}-->
         <div class="form_menu"><input class="button_css" type="submit" value="ログイン"></div>
-        <a class="header_link" href="{% url 'register' %}">新規登録してみる？</a>
+        <a class="header_link register_link" href="{% url 'register' %}">新規登録してみる？</a>
     </form>
 </main>
 {% endblock %}

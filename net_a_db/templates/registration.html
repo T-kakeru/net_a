@@ -6,14 +6,37 @@
     <h2>登録画面</h2>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-        {% if user_form.errors %}
-            <div class="alert alert-danger">
-                <strong>User Form Errors:</strong>
-                {{ user_form.errors }}
-            </div>
+        {% if user_form.errors or profile_form.errors %}
+            <p class="alert alert-danger">入力事項にエラーがあります。確認して再度入力してください。</p>
         {% endif %}
+        <table>
+            <tr>
+                <th>ユーザー名</th><td>{{ user_form.username }}</td>
+            </tr>
+            <tr>
+                <th class="add_user_help">使える記号、@/./+/-/_</th>
+            </tr>
+            <tr>
+                <th>メールアドレス</th><td>{{ user_form.email }}</td>
+            </tr>
+            <tr>
+                <th class="add_user_help">有効なメールアドレスを入力</th>
+            </tr>
+            <tr>
+                <th>パスワード</th><td>{{ user_form.password1 }}</td>
+            </tr>
+            <tr>
+                <th>
+                    <div class="add_user_help add_user_help_indent">6文字以上、名前やメールと似てない情報</div>
+                    <div class="add_user_help">数字だけや、簡単なパスワードは利用不可</div>
+                </th>
+            </tr>
+            <tr>
+                <th>パスワード(確認用)</th><td>{{ user_form.password2 }}</td>
+            </tr>
+            <!-- パスワード確認フィールドは UserForm には存在しないため、必要であればカスタムフィールドを追加する必要がある -->
+        </table>
+        {{ profile_form.as_p }}
         {% if profile_form.errors %}
             <div class="alert alert-danger">
                 <strong>Profile Form Errors:</strong>

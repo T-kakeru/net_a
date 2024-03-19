@@ -9,6 +9,11 @@
     -->
         
         <h2>最新の投稿</h2>
+        <!-- 保留機能、ヘッダーにアイコンを表示、ユーザープロファイルが存在する場合、何かの処理を行う 
+        <p>{{ user_profile.user.username }}のプロファイル情報</p>
+    {% else %}
+        <p>ゲストユーザー</p>
+    {% endif %}-->
         <section class="slide_image">
             {% for fish_info in fish_infos %}
                 <a href="{% url 'fish_info' fish_info.id %}">

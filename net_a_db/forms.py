@@ -11,7 +11,7 @@ class UserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2")
+        fields = ("username", "email", "password1", "password2")    
 
 #新規登録アイコン用
 class ProfileForm(forms.ModelForm):
