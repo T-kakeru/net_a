@@ -3,6 +3,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+#使っていない
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     icon = models.ForeignKey(
@@ -41,7 +42,7 @@ class FishInfo(models.Model):
     gender = models.IntegerField(null=True, blank=True)
     #categoryのカラムを追加
     category = models.CharField(max_length=20, null=True, blank=True)
-    fish_mixed = models.CharField(max_length=200, null=True, blank=True)
+    fish_mixed = models.TextField(max_length=200, null=True, blank=True)
     temp = models.CharField(max_length=20, null=True, blank=True)
     fish_size = models.IntegerField(null=True, blank=True)
     aquarium_size = models.CharField(max_length=20, null=True, blank=True)

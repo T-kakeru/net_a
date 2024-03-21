@@ -7,8 +7,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tag_list', views.tag_list, name='tag_list'),
-    path('sign_up_check', views.sign_up_check, name='sign_up_check'),
-    path('sign_up', views.sign_up, name='sign_up'),
     path('sign_in', views.sign_in, name='sign_in'),
     path('setting', views.setting, name='setting'),
     path('search', views.search, name='search'),
@@ -38,4 +36,8 @@ urlpatterns = [
     path('search/results/', views.search_results, name='search_results'),
     path('search/', views.search_fish_info, name='search_fish_info'),
     path('add_fish', views.add_fish, name='add_fish'),
+    path('icon_change/', views.icon_change, name='icon_change'),
+    path('fish_new_list/', views.fish_new_list, name='fish_new_list'),
+    path('fish_size_list/', views.fish_size_list, name='fish_size_list'),
+    path('fish_favorite_list/', views.fish_favorite_list, name='fish_favorite_list'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

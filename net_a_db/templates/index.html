@@ -9,11 +9,6 @@
     -->
         
         <h2>最新の投稿</h2>
-        <!-- 保留機能、ヘッダーにアイコンを表示、ユーザープロファイルが存在する場合、何かの処理を行う 
-        <p>{{ user_profile.user.username }}のプロファイル情報</p>
-    {% else %}
-        <p>ゲストユーザー</p>
-    {% endif %}-->
         <section class="slide_image">
             {% for fish_info in fish_infos %}
                 <a href="{% url 'fish_info' fish_info.id %}">
@@ -28,6 +23,7 @@
                 </a>
             {% endfor %}
         </section>
+        <div class="more_list"><a href="{% url 'fish_new_list' %}">もっと見る≫</a></div>
 
         <h2>人気の魚</h2>
         <section class="slide_image">
@@ -44,7 +40,7 @@
             </a>
         {% endfor %}
         </section>
-
+        <div class="more_list"><a href="{% url 'fish_favorite_list' %}">もっと見る≫</a></div>
 
         <h2>大きい魚</h2>
         <section class="slide_image">
@@ -61,8 +57,9 @@
                 </a>
             {% endfor %}
         </section>
+        <div class="more_list"><a href="{% url 'fish_size_list' %}">もっと見る≫</a></div>
 
-        <h2>珍しい魚</h2>
+        <!--<h2>珍しい魚</h2>
         <section class="slide_image">
             {% for fish_info in fish_infos %}
                 <a href="{% url 'fish_info' fish_info.id %}">
@@ -77,8 +74,10 @@
                 </a>
             {% endfor %}
         </section>
+        <div class="more_list"><a href="{% url 'fish_new_list' %}">もっと見る</a></div>-->
 
         <h2>カテゴリーから探す</h2>
+        <!--
         <section>
             <h3>淡水魚</h3>
             <div class="category">
@@ -129,7 +128,7 @@
                 <div>エビ・貝・カニ（海）</div>
                 <div>その他海水魚</div>
             </div>
-            <!--<h3>魚の特徴</h3>
+            実現しない<h3>魚の特徴</h3>
             <div class="category">
                 <div>混泳が得意な魚</div>
                 <div>泳ぎが得意な魚</div>
@@ -145,8 +144,8 @@
                 <div>肉食魚</div>
                 <div>長細い魚</div>
                 <div>古代魚</div>
-            </div>-->
-        </section>
+            </div>
+        </section>-->
     </div>
 </main>
 

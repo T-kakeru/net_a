@@ -149,7 +149,7 @@ h2{
 }
 
 .icon_setting{
-    width: 100%;
+    width: 200px;
     height: 200px;
     display: flex;
     justify-content: center;
@@ -159,18 +159,6 @@ h2{
 .icon_setting img{
     width: 150px;
     height: 150px;
-}
-
-.gacha_image{
-    width: 200px;
-    display: flex;
-    justify-content: start;
-    align-items: end;
-}
-
-.gacha_image img{
-    width: 50px;
-    height: 50px;
 }
 
 .setting_box{

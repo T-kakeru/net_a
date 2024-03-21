@@ -4,10 +4,6 @@ from django.http import HttpResponse
 # Create your views here.
 def tag_list(request):
     return render(request, 'tag_list.html')
-def sign_up_check(request):
-    return render(request, 'sign_up_check.html')
-def sign_up(request):
-    return render(request, 'sign_up.html')
 def sign_in(request):
     return render(request, 'sign_in.html')
 def setting(request):
@@ -98,12 +94,6 @@ def add_fish(request):
 
         return render(request, 'add_fish.html', {'fish_info_form': fish_info_form})
 
-"""def user_profile(request):
-    user_profile_instance = request.user
-    if request.user:
-        user_profile_instance = Profile.objects.filter(user=request.user).all()
-    return {'user_profile': user_profile_instance}"""
-
 @login_required
 def user_logout(request):
     logout(request)
@@ -115,8 +105,8 @@ def info(request):
 
 #indexの色々な情報を表示
 def index(request):
-    fish_infos = FishInfo.objects.all()  # すべての FishInfo レコードを取得
-    fish_infos_size = FishInfo.objects.filter(fish_size__gte=30).all()
+    fish_infos = FishInfo.objects.order_by('-create_at')
+    fish_infos_size = FishInfo.objects.filter(fish_size__gte=23).order_by('-create_at').all()
     fish_infos_favorites = FishInfo.objects.order_by('-good')
     return render(request, 'index.html', {
         'fish_infos': fish_infos,
@@ -124,15 +114,29 @@ def index(request):
         'fish_infos_favorites': fish_infos_favorites,
         })
 
-#魚の詳細情報
+#下記、もっと見る[最新の投稿、大きい魚、人気の魚]
+def fish_new_list(request):
+    fish_new_list = FishInfo.objects.order_by('-create_at')
+    return render(request, 'fish_new_list.html', {'fish_new_list': fish_new_list})
+
+def fish_size_list(request):
+    fish_size_list = FishInfo.objects.filter(fish_size__gte=23).order_by('-create_at').all()
+    return render(request, 'fish_size_list.html', {'fish_size_list': fish_size_list})
+
+def fish_favorite_list(request):
+    fish_favorite_list = FishInfo.objects.order_by('-good')
+    return render(request, 'fish_favorite_list.html', {'fish_favorite_list': fish_favorite_list})
+
+#詳細情報、いいねカウント
 def fish_info(request, fish_info_id):
     fish_info = get_object_or_404(FishInfo, pk=fish_info_id)
-    return render(request, 'fish_info.html', {'fish_info': fish_info})
+    favorites_count = Favorite.objects.filter(fish=fish_info).count()  # お気に入りの数をカウント
+    return render(request, 'fish_info.html', {'fish_info': fish_info, 'good_count': favorites_count})
 
-def genre(request, genre):# ジャンルIDに対応するFishInfo レコードを取得
+# ジャンルIDに対応するFishInfo レコードを取得
+def genre(request, genre):
     fish_infos_genre = FishInfo.objects.filter(genre=genre)
     return render(request, 'genre_list.html', {'fish_infos_genre': fish_infos_genre})
-
 
 #いいね機能
 from .models import Favorite
@@ -145,18 +149,18 @@ def favorite_toggle(request, fish_info_id):
         favorite.delete()# すでにいいねが存在する場合は、いいねを削除
     return redirect('fish_info', fish_info_id=fish_info_id)  # 適切なビュー名に置き換えてください
 
-#いいねカウント
-def fish_info(request, fish_info_id):
-    fish_info = get_object_or_404(FishInfo, pk=fish_info_id)
-    favorites_count = Favorite.objects.filter(fish=fish_info).count()  # お気に入りの数をカウント
-    return render(request, 'fish_info.html', {'fish_info': fish_info, 'good_count': favorites_count})
-
 #お気に入り画面表示
 def favorite_list(request):
     user = request.user
     favorites = Favorite.objects.filter(user=user).select_related('fish')
     fish_info_favorite = [favorite.fish for favorite in favorites]
     return render(request, 'favorite_list.html', {'fish_info_favorite': fish_info_favorite})
+
+#自分の魚
+def my_fish(request):
+    my_fish_list = FishInfo.objects.filter(user=request.user)
+    return render(request, 'my_fish.html', {'my_fish_list': my_fish_list})
+    
 
 #検索機能
 from django.db.models import Q
@@ -168,7 +172,7 @@ def search_fish_info(request):
         return redirect(f"{reverse('search_results')}?q={query}")# 検索クエリをURLパラメータに含めて、検索結果表示ビューにリダイレクト
     return render(request, 'search_form.html')# 検索後も再度検索を表示する
 
-    # 検索結果を表示
+# 検索結果を表示
 def search_results(request):
     query = request.GET.get('q', '')# GETリクエストから検索クエリを取得
     if query:# 検索クエリに基づいてFishInfoオブジェクトを検索
@@ -176,6 +180,25 @@ def search_results(request):
     else:
         fish_info_search = FishInfo.objects.none()# 検索クエリが空の場合は、空のクエリセットを生成
     return render(request, 'search.html', {'fish_info_search': fish_info_search, 'query': query})
+
+#アイコン選択機能
+from .models import UserProfile, Icon
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def icon_change(request):
+    if request.method == 'POST':
+        icon_id = request.POST.get('icon_id')
+        new_icon = Icon.objects.get(id=icon_id)
+        user_profile = UserProfile.objects.get(user=request.user)
+        user_profile.icon = new_icon
+        user_profile.save()
+        return redirect('setting')  # ユーザーの設定ページへリダイレクト
+    else:
+        icons = Icon.objects.all()
+        return render(request, 'icon_change.html', {'icons': icons})
+
+    
 """
 from .models import FishInfo
 def fish_info(request):

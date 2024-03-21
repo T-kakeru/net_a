@@ -45,9 +45,9 @@ from django.conf import settings
 
 class FishInfoForm(forms.ModelForm):
     GENDER_CHOICES = [
-        (None, '選択してください'),
-        (1, 'オス'),
-        (2, 'メス'),
+        (1, '不明'),
+        (2, 'オス'),
+        (3, 'メス'),
     ]
 
     CATEGORY_CHOICES = [
@@ -93,15 +93,14 @@ class FishInfoForm(forms.ModelForm):
     ]
 
     TEMP_CHOICES = [
-        (None, ''),
-        (1, '10'),
-        (2, '14'),
-        (3, '17'),
-        (4, '20'),
-        (5, '22'),
-        (6, '24'),
-        (7, '25'),
-        (8, '26'),
+        (1, '26'),
+        (2, '10'),
+        (3, '14'),
+        (4, '17'),
+        (5, '20'),
+        (6, '22'),
+        (7, '24'),
+        (8, '25'),
         (9, '27'),
         (10, '28'),
         (11, '29'),
@@ -111,11 +110,10 @@ class FishInfoForm(forms.ModelForm):
     ]
     
     AQUARIUM_SIZE_CHOICES = [
-        (None, ''),
-        (1, '20'),
-        (2, '30'),
-        (3, '45'),
-        (4, '60'),
+        (1, '60'),
+        (2, '20'),
+        (3, '30'),
+        (4, '45'),
         (5, '70'),
         (6, '90'),
         (7, '100'),
@@ -129,20 +127,20 @@ class FishInfoForm(forms.ModelForm):
         (14, '500'),
     ]
 
-    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '魚の名前'}), label="名前")
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '魚の名前', 'class': 'input-style'}), label="名前")
     preview = forms.ImageField(label="プレビュー画像", required=False)
     movie = forms.FileField(label="動画", required=False)
-    info = forms.CharField(widget=forms.Textarea(attrs={'placeholder': '飼育情報'}), label="飼育情報", required=False)
-    gender = forms.ChoiceField(choices=GENDER_CHOICES, label="性別", widget=forms.RadioSelect, required=False)
+    info = forms.CharField(widget=forms.Textarea(attrs={'placeholder': '飼育情報', 'class': 'textarea-style'}), label="飼育情報", required=False)
+    gender = forms.ChoiceField(choices=GENDER_CHOICES, label="性別", required=False)
     category = forms.ChoiceField(choices=CATEGORY_CHOICES, label="カテゴリー", required=False)
-    fish_mixed = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '混泳可能な魚'}), label="混泳情報", required=False)
+    fish_mixed = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '混泳できた魚', 'class': 'textarea-style'}), label="混泳情報", required=False)
     temp = forms.ChoiceField(choices=TEMP_CHOICES, label="適正温度", required=False)
-    fish_size = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': '魚のサイズ'}), label="魚のサイズ", required=False)
+    fish_size = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': '魚のサイズ', 'class': 'input-style'}), label="魚のサイズ", required=False)
     aquarium_size = forms.ChoiceField(choices=AQUARIUM_SIZE_CHOICES, label="水槽サイズ", required=False)
-    material = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'レイアウトの情報や、使用器具'}), label="レイアウト情報", required=False)
-    food = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '餌'}), label="餌", required=False)
+    material = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'レイアウトの情報や、使用器具', 'class': 'input-style'}), label="レイアウト情報", required=False)
+    food = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '餌', 'class': 'input-style'}), label="餌", required=False)
 
     class Meta:
         model = FishInfo
         fields = ['name', 'preview', 'movie', 'info', 'gender', 'category', 
-                  'fish_mixed', 'temp', 'fish_size', 'aquarium_size', 'material', 'food']
+                'fish_mixed', 'temp', 'fish_size', 'aquarium_size', 'material', 'food']

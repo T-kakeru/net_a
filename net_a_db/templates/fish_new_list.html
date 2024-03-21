@@ -1,12 +1,11 @@
 {% extends "base.html" %}
-
 {% block content %}
 {% load static %}
 <main class="">
-    <h2>自分の投稿</h2>
+    <h2>最新の投稿</h2>
     <section class="list_image">
         <div class="list_image_box">
-        {% for fish_info in my_fish_list %}
+        {% for fish_info in fish_new_list %}
             <a href="{% url 'fish_info' fish_info.id %}">
             {% if fish_info.preview %}            
                 <div class="list_image_item">

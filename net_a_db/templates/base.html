@@ -17,15 +17,15 @@
         <div class="header_flex_image">
             <a href="{% url 'net_a_tutorial' %}"><img class="logo" src="{% static 'img/logo.PNG' %}" alt="ロゴ"></a>
             <div class="header_space center_space"></div>
-                <a href="{% url 'search' %}">検索</a>
+                <a href="{% url 'search' %}"><img src="{% static 'img/search.PNG' %}" class="home" alt="検索"></a>
                 <a href="{% url 'index' %}"><img src="{% static 'img/home.PNG' %}" class="home" alt="ホーム"></a>
                 {% if user.is_authenticated %}
                     <a class="header_link" href="{% url 'my_page' %}">
-                        <img src="{% static 'img/icon1.PNG' %}" class="icon" alt="アイコン">
+                        <img src="{{ user_profile.icon.icon_file_name.url }}" class="home icon" alt="ユーザーのアイコン">
                     </a>
                 {% else %}
                     <a class="header_link" href="{% url 'user_login' %}">
-                        <img src="{% static 'img/test.jpg' %}" class="home" alt="ホーム">
+                        <img src="{% static 'img/login.png' %}" class="home" alt="ログイン">
                     </a>
                 {% endif %}
             <div class="header_space"></div>

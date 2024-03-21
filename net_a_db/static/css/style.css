@@ -30,7 +30,8 @@ th, td {
 }
 
 th {
-    width: 180px;
+    width: auto;
+    font-size: 14px;
 }
 
 td {
@@ -79,15 +80,15 @@ header{
 }
 
 .icon{
-    margin-left: 10px;
-    width: 60px;
-    height: 60px;
     border-radius: 50%;
 }
 
 .home{
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 7px;
 }
 
 .search_menu{
@@ -173,7 +174,8 @@ header{
 }
 
 .login_name{
-    font-size: 32px;
+    font-size: 25px;
+    font-weight: 600;
 }
 
 
@@ -189,9 +191,33 @@ header{
     padding-bottom: 5px;
 }
 
-#tutorial{
+.add_user_privacy{
+    font-size: 13px;
+}
+
+.add_user_privacy a{
+    font-size: 15px;
+    color: #0051c2;
+}
+
+#tutorial {
+    position: relative; /* ::before疑似要素の位置決めの基準点とする */
+    overflow: hidden; /* 疑似要素のはみ出しを防ぐ */
     text-align: center;
     padding-left: 40px;
+}
+
+#tutorial::before {
+    content: ''; /* 疑似要素にはcontentプロパティが必要です。 */
+    position: absolute; /* 親要素に対して絶対位置指定します。 */
+    inset: 0; /* top, right, bottom, left すべてを 0 に設定 */
+    background-image: url('../img/logo_back.png'); /* 背景画像を指定します。 */
+    background-size: 30%; /* 画像のサイズを元の50%に設定します。 */
+    background-repeat: no-repeat; /* 画像の繰り返しをなくします。 */
+    background-position: center; /* 画像を要素の中央に配置します。 */
+    filter: blur(8px); /* ぼかし効果を適用します。 */
+    opacity: 0.3; /* 透明度を50%に設定します。 */
+    pointer-events: none; /* 疑似要素上のマウスイベントを無視します。 */
 }
 
 .tutorial_end_box{
@@ -275,6 +301,19 @@ header{
     color: #ffffff;
 }
 
+.more_list{
+    display: flex;
+    justify-content: end;
+}
+
+.more_list a{
+    font-size: 20px;
+    font-weight: bold;
+    color: #0051c2;
+    margin-right: 30px;
+    margin-top: 5px;
+}
+
 .search_help {
     font-size: 10px;
     color: #454545;
@@ -344,6 +383,20 @@ header{
     aspect-ratio: 1 / 1; /* 縦横比を1:1に保持 */
 }
 
+.add_fish_form{
+    font-size: 8px;
+}
+
+.textarea-style{
+    width: 300px;
+    height: 70px;
+}
+
+.input-style{
+    width: 300px;
+    height: 18px;
+}
+
 /*個人設定*/
 #setting{
     margin: 0 30px;
@@ -357,21 +410,37 @@ header{
     align-items: end;
 }
 
-.icon_setting img{
-    width: 150px;
-    height: 150px;
-}
-
-.gacha_image{
-    width: 200px;
+.user_profile{
     display: flex;
-    justify-content: start;
-    align-items: end;
+    text-align: center;
+    flex-flow: column;
+    align-items:center;
 }
 
-.gacha_image img{
-    width: 50px;
-    height: 50px;
+.icon-container {
+    position: relative; /* 子要素の絶対位置付けの基準点 */
+    width: 200px;
+    height: 200px;
+}
+
+.icon-container .icon {
+    width: 200px;
+    height: 200px;
+    display: block; /* インライン要素からブロック要素へ変更 */
+    height: auto; /* アスペクト比を保持 */
+}
+
+.icon-change {
+    position: absolute; /* .icon-container に対して絶対位置付け */
+    bottom: 10px; /* 下端からの距離 */
+    right: 10px; /* 右端からの距離 */
+    width: 60px; /* ボタンのサイズ、必要に応じて調整 */
+    height: 60px; /* ボタンのサイズ、必要に応じて調整 */
+    cursor: pointer; /* ホバー時にカーソルを変更 */
+}
+
+.user_profile table{
+    font-size: 12px;
 }
 
 .setting_box{
@@ -383,8 +452,22 @@ header{
 
 .input_text{
     width: 70%;
-    max-width: 500px;
+    max-width: 300px;
 
+}
+
+.choice_icon_box{
+    padding-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 50%;
+}
+
+
+.choice_icon{
+    width: 102px;
+    height: 102px;
+    padding: 0;
 }
 
 .button{
@@ -392,6 +475,24 @@ header{
     margin-top: 30px;
     margin-bottom: 50px;
 }
+
+.color_sky{
+    font-size: 23px;
+    color: #16c9c9;
+    font-weight: 600;
+}
+
+.color_blue{
+    font-size: 25px;
+    color: rgb(77, 77, 207);
+    font-weight: 600;
+}
+
+.color_green{
+    color: rgb(28, 134, 28);
+    font-weight: 600;
+}
+
 
 /*footer*/
 .footer_menu{
@@ -430,13 +531,7 @@ header{
         height: 50px;
         margin: 5px;
     }
-    
-    .icon{
-        width: 45px;
-        height: 45px;
-        margin: 5px;
-    }
-    
+
     .header_menu {
         display: contents;
     }
@@ -477,6 +572,11 @@ header{
         /*background-image: ;*/
     }  
 
+    .name_box p{
+        height: 70px;
+        padding-bottom: 0;
+    }
+
     .my_menu_item{
         gap: 30px;
     }
@@ -490,12 +590,19 @@ header{
     .my_menu_item div{
         border-radius: 75px;
     }
+    
+    .textarea-style{
+        width: 250px;
+        height: 70px;
+    }
+    
+    .input-style{
+        width: 250px;
+        height: 18px;
+    }
 
     /*個人設定*/
-    .icon_setting img{
-        width: 150px;
-        height: 150px;
-    }
+
     
     .setting_box div{
         font-size: 10px;

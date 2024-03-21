@@ -2,32 +2,29 @@
 
 {% block content %}
 {% load static %}
-<main id="setting">
+
+<main>
     <section>
-        <a class="icon_setting" href="アイコン変更"><img src="image/icon1.PNG" class="icon" alt="アイコン"></a>
-        <div class="setting_box">
-            <div>
-                Level.
-                <span class="my_level">1</span>
+        <div class="user_profile">
+            <h2>プロフィール設定</h2>
+            <div class="icon-container">
+                <a href="{% url 'icon_change' %}">
+                    <img src="{{ user_profile.icon.icon_file_name.url }}" class="icon" alt="アイコンを選ぼう！">
+                </a>
+                <a href="{% url 'icon_change' %}">
+                    <img src="{% static 'img/icon_change.png' %}" class="icon-change" alt="アイコンを変更するボタン">
+                </a>
             </div>
-            <div>
-                Exp
-                <span class="my_level_exp">0</span>
-                /1000
-            </div>
-            <div>
-                <a href="" class="gacha_image"><img src="image/gacha0.PNG" alt=""></a>
-            </div>
+            <table>
+                <tr>
+                    <th>ユーザー名</th><td>{{ user_profile.user.username }}</td>
+                </tr>
+                <tr>
+                    <th>メールアドレス</th><td>{{ user_profile.user.email }}</td>
+                </tr>
+            </table>
         </div>
     </section>
-    <section class="setting_box">
-        <h3>ニックネーム</h3>
-        <input type="text" class="input_text" value="熱太">
-        <h3>メールアドレス</h3>
-        <input type="mail" class="input_text" value="○○○○○○@gmail.com">
-        <h3>パスワード</h3>
-        <input type="password" class="input_text"value="*********">
-        <input class="button" type="submit" value="変更する">
-    </section>
 </main>
+
 {% endblock %}
