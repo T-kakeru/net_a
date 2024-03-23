@@ -17,8 +17,8 @@
         <div class="header_flex_image">
             <a href="{% url 'net_a_tutorial' %}"><img class="logo" src="{% static 'img/logo.PNG' %}" alt="ロゴ"></a>
             <div class="header_space center_space"></div>
-                <a href="{% url 'search' %}"><img src="{% static 'img/search.PNG' %}" class="home" alt="検索"></a>
-                <a href="{% url 'index' %}"><img src="{% static 'img/home.PNG' %}" class="home" alt="ホーム"></a>
+                <a href="{% url 'search' %}"><img src="{% static 'img/search.png' %}" class="home" alt="検索"></a>
+                <a href="{% url 'index' %}"><img src="{% static 'img/home.png' %}" class="home" alt="ホーム"></a>
                 {% if user.is_authenticated %}
                     <a class="header_link" href="{% url 'my_page' %}">
                         <img src="{{ user_profile.icon.icon_file_name.url }}" class="home icon" alt="ユーザーのアイコン">
@@ -39,9 +39,9 @@
     <div class="footer">
         <div class="separator_line"></div>
         <div class="footer_menu">
-            <a href="{% url 'net_a_tutorial' %}">NetAはどういうサイト？</a>
-            <div>xxxxxxxx@neta.co.jp</div>
-            <a href="{% url 'privacy' %}">利用規約</a>
+            <a href="{% url 'net_a_tutorial' %}">NetAとは、どういうサイト？</a>
+            <div>kakeru.takehana0918@gmail.com</div>
+            <a href="{% url 'privacy' %}">利用規約はこちら</a>
         </div>
     </div>
 </footer>

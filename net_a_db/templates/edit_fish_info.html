@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<main>
+    <h1>魚情報の編集</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table id="add_fish_form">
+            <tr>
+                <th>名前</th><td>{{form.name}}</td>
+            </tr>
+            <tr>
+                <th>写真</th><td>{{form.preview}}</td>
+            </tr>
+            <tr>
+                <th>飼育情報</th><td>{{ form.info }}</td>
+            </tr>
+            <tr>
+                <th>性別</th><td>{{ form.gender }}</td>
+            </tr>
+            <tr>
+                <th>カテゴリー</th><td>{{ form.category }}</td>
+            </tr>
+            <tr>
+                <th>混泳（一緒に住んでいる魚）</th><td>{{ form.fish_mixed }}</td>
+            </tr>
+            <tr>
+                <th>飼育温度</th><td>{{ fish_info_form.temp }}(℃)</td>
+            </tr>
+            <tr>
+                <th>魚の大きさ</th><td>{{ fish_info_form.fish_size }}(cm)</td>
+            </tr>
+            <tr>
+                <th>水槽のサイズ</th><td>{{ form.aquarium_size }}(cm)</td>
+            </tr>
+            <tr>
+                <th>レイアウトの情報や、使用器具</th><td>{{ form.material }}</td>
+            </tr>
+            <tr>
+                <th>あげている餌</th><td>{{ form.food }}</td>
+            </tr>
+        </table>
+        <button type="submit" class="button_css">保存</button>
+    </form>
+</main>
+{% endblock %}

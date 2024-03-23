@@ -40,6 +40,8 @@ def registration(request):
     return render(request, 'registration.html')
 def base_root(request):
     return render(request, 'base_root.html')
+def first(request):
+    return render(request, 'first.html')
 
 
 from net_a_db.forms import UserForm, LoginForm, ProfileForm
@@ -57,7 +59,7 @@ def register(request):
             profile.user = user
             profile.save()
             login(request, user)  # ユーザーをログインさせる
-            return redirect('net_a_tutorial')
+            return redirect('first')
     else:
         user_form = UserForm()
         profile_form = ProfileForm()
@@ -82,17 +84,18 @@ def user_login(request):
         'login_form': login_form
     })
 
-
 from .forms import FishInfoForm
-from .models import FishInfo, Profile
+from .models import FishInfo, History
 
 def add_fish(request):
-        fish_info_form = FishInfoForm(request.POST, request.FILES)
-        if fish_info_form.is_valid():
-            fish_info_form.save()
-            return redirect('my_page')
-
-        return render(request, 'add_fish.html', {'fish_info_form': fish_info_form})
+    fish_info_form = FishInfoForm(request.POST, request.FILES)
+    if fish_info_form.is_valid():
+        fish_info = fish_info_form.save(commit=False)
+        fish_info.user = request.user
+        fish_info.category = fish_info_form.cleaned_data.get('category')
+        fish_info_form.save()
+        return redirect('my_page')
+    return render(request, 'add_fish.html', {'fish_info_form': fish_info_form})
 
 @login_required
 def user_logout(request):
@@ -128,10 +131,22 @@ def fish_favorite_list(request):
     return render(request, 'fish_favorite_list.html', {'fish_favorite_list': fish_favorite_list})
 
 #詳細情報、いいねカウント
+from django.utils import timezone
 def fish_info(request, fish_info_id):
     fish_info = get_object_or_404(FishInfo, pk=fish_info_id)
     favorites_count = Favorite.objects.filter(fish=fish_info).count()  # お気に入りの数をカウント
+    if request.user.is_authenticated:
+        history, created = History.objects.update_or_create(
+            user=request.user,
+            fish=fish_info,
+            defaults={'update_at': timezone.now()}
+        )
     return render(request, 'fish_info.html', {'fish_info': fish_info, 'good_count': favorites_count})
+
+#閲覧履歴
+def history(request):
+    histories = History.objects.filter(user=request.user).order_by('-update_at')
+    return render(request, 'history.html', {'histories': histories})
 
 # ジャンルIDに対応するFishInfo レコードを取得
 def genre(request, genre):
@@ -158,8 +173,8 @@ def favorite_list(request):
 
 #自分の魚
 def my_fish(request):
-    my_fish_list = FishInfo.objects.filter(user=request.user)
-    return render(request, 'my_fish.html', {'my_fish_list': my_fish_list})
+    my_fishs = FishInfo.objects.filter(user=request.user)
+    return render(request, 'my_fish.html', {'my_fishs': my_fishs})
     
 
 #検索機能
@@ -198,6 +213,19 @@ def icon_change(request):
         icons = Icon.objects.all()
         return render(request, 'icon_change.html', {'icons': icons})
 
+#編集機能
+
+@login_required
+def edit_fish_info(request, fish_id):
+    fish_info = get_object_or_404(FishInfo, id=fish_id, user=request.user)
+    if request.method == "POST":
+        form = FishInfoForm(request.POST, request.FILES, instance=fish_info)
+        if form.is_valid():
+            form.save()
+            return redirect('my_page')  # 魚情報の詳細ページへリダイレクト
+    else:
+        form = FishInfoForm(instance=fish_info)
+    return render(request, 'edit_fish_info.html', {'form': form, 'fish_info': fish_info})
     
 """
 from .models import FishInfo

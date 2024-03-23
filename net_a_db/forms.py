@@ -131,16 +131,24 @@ class FishInfoForm(forms.ModelForm):
     preview = forms.ImageField(label="プレビュー画像", required=False)
     movie = forms.FileField(label="動画", required=False)
     info = forms.CharField(widget=forms.Textarea(attrs={'placeholder': '飼育情報', 'class': 'textarea-style'}), label="飼育情報", required=False)
-    gender = forms.ChoiceField(choices=GENDER_CHOICES, label="性別", required=False)
-    category = forms.ChoiceField(choices=CATEGORY_CHOICES, label="カテゴリー", required=False)
+    gender = forms.ChoiceField(choices=GENDER_CHOICES, label="性別", required=False, widget=forms.Select())
+    category = forms.ChoiceField(choices=CATEGORY_CHOICES,label="カテゴリー", required=False, widget=forms.Select())
     fish_mixed = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '混泳できた魚', 'class': 'textarea-style'}), label="混泳情報", required=False)
     temp = forms.ChoiceField(choices=TEMP_CHOICES, label="適正温度", required=False)
     fish_size = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': '魚のサイズ', 'class': 'input-style'}), label="魚のサイズ", required=False)
     aquarium_size = forms.ChoiceField(choices=AQUARIUM_SIZE_CHOICES, label="水槽サイズ", required=False)
-    material = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'レイアウトの情報や、使用器具', 'class': 'input-style'}), label="レイアウト情報", required=False)
+    material = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'レイアウト、使用器具', 'class': 'input-style'}), label="レイアウト情報", required=False)
     food = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '餌', 'class': 'input-style'}), label="餌", required=False)
 
     class Meta:
         model = FishInfo
         fields = ['name', 'preview', 'movie', 'info', 'gender', 'category', 
                 'fish_mixed', 'temp', 'fish_size', 'aquarium_size', 'material', 'food']
+        # categoryフィールドの値を取得し、対応する表示値を返します。
+        def clean_category(self):
+        # categoryフィールドの値を取得し、対応する表示値を返します。
+            category = self.cleaned_data.get('category')
+            for key, label in self.fields['category'].choices:
+                if key == category:
+                    return label
+            return category

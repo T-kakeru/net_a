@@ -31,7 +31,92 @@ class UserInfo(models.Model):
     create_at = models.DateTimeField(default=timezone.datetime.now)
     update_at = models.DateTimeField(default=timezone.datetime.now)
 
+
+
 class FishInfo(models.Model):
+    GENDER_CHOICES = [
+        ('1', '不明'),
+        ('2', 'オス'),
+        ('3', 'メス'),
+    ]
+
+    CATEGORY_CHOICES = [
+        ('1', ''),
+        ('2', 'アロワナ'),
+        ('3', 'ポリプテルス'),
+        ('4', 'プレコ'),
+        ('5', 'パクー（メチニスなど）'),
+        ('6', 'カラシン(テトラなど)'),
+        ('7', 'プラティ・卵生メダカなど'),
+        ('8', 'ローチ'),
+        ('9', 'エンゼルフィッシュ'),
+        ('10', 'ディスカス'),
+        ('11', 'シクリッド'),
+        ('12', 'コリドラス'),
+        ('13', '淡水エイ'),
+        ('14', 'ベタ'),
+        ('15', 'ナマズ'),
+        ('16', 'フグ'),
+        ('17', '川のエビ、貝、カニ'),
+        ('18', '汽水魚'),
+        ('19', 'その他熱帯魚'),
+        ('20', 'メダカ'),
+        ('21', '金魚'),
+        ('22', '鯉'),
+        ('23', '川魚'),
+        ('24', 'その他淡水魚'),
+        ('25', 'スズメダイ'),
+        ('26', 'ヤッコ'),
+        ('27', 'チョウチョウウオ'),
+        ('28', 'ハギ'),
+        ('29', 'ギンポ'),
+        ('30', 'ベラ'),
+        ('31', 'ハゼ'),
+        ('32', 'ハタ'),
+        ('33', 'フグ'),
+        ('34', 'エイ、サメ'),
+        ('35', 'タコ、イカ'),
+        ('36', 'クラゲ、ナマコ、ヒトデなど'),
+        ('37', '海のエビ、貝、カニ'),
+        ('38', '一般に食用魚等の魚種'),
+        ('39', 'その他海水魚'),
+    ]
+
+    TEMP_CHOICES = [
+        ('1', '26'),
+        ('2', '10'),
+        ('3', '14'),
+        ('4', '17'),
+        ('5', '20'),
+        ('6', '22'),
+        ('7', '24'),
+        ('8', '25'),
+        ('9', '27'),
+        ('10', '28'),
+        ('11', '29'),
+        ('12', '30'),
+        ('13', '31'),
+        ('14', '33'),
+    ]
+    
+    AQUARIUM_SIZE_CHOICES = [
+        ('1', '60'),
+        ('2', '20'),
+        ('3', '30'),
+        ('4', '45'),
+        ('5', '70'),
+        ('6', '90'),
+        ('7', '100'),
+        ('8', '120'),
+        ('9', '150'),
+        ('10', '180'),
+        ('11', '200'),
+        ('12', '240'),
+        ('13', '300'),
+        ('14', '400'),
+        ('15', '500'),
+    ]
+        
     user = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=50)
@@ -39,13 +124,13 @@ class FishInfo(models.Model):
     preview = models.ImageField(upload_to='upload_img/', null=True, blank=True)
     movie = models.FileField(upload_to='upload_video/', null=True, blank=True)
     info = models.TextField(max_length=1000, null=True, blank=True)
-    gender = models.IntegerField(null=True, blank=True)
+    gender = models.CharField(max_length=20, null=True, blank=True, choices=GENDER_CHOICES)
     #categoryのカラムを追加
-    category = models.CharField(max_length=20, null=True, blank=True)
+    category = models.CharField(max_length=20, null=True, blank=True, choices=CATEGORY_CHOICES)
     fish_mixed = models.TextField(max_length=200, null=True, blank=True)
-    temp = models.CharField(max_length=20, null=True, blank=True)
-    fish_size = models.IntegerField(null=True, blank=True)
-    aquarium_size = models.CharField(max_length=20, null=True, blank=True)
+    temp = models.CharField(max_length=20, null=True, blank=True, choices=TEMP_CHOICES)
+    fish_size = models.CharField(max_length=20, null=True, blank=True)
+    aquarium_size = models.CharField(max_length=20, null=True, blank=True, choices=AQUARIUM_SIZE_CHOICES)
     material = models.CharField(max_length=200, null=True, blank=True)
     food = models.CharField(max_length=200, null=True, blank=True)
     #goodのカラムを追加

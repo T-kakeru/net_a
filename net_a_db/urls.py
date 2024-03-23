@@ -40,4 +40,6 @@ urlpatterns = [
     path('fish_new_list/', views.fish_new_list, name='fish_new_list'),
     path('fish_size_list/', views.fish_size_list, name='fish_size_list'),
     path('fish_favorite_list/', views.fish_favorite_list, name='fish_favorite_list'),
+    path('fish_info/edit/<int:fish_id>/', views.edit_fish_info, name='edit_fish_info'),
+    path('first', views.first, name='first'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

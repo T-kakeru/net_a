@@ -74,10 +74,8 @@
                 </a>
             {% endfor %}
         </section>
-        <div class="more_list"><a href="{% url 'fish_new_list' %}">もっと見る</a></div>-->
-
+        <div class="more_list"><a href="{% url 'fish_new_list' %}">もっと見る</a></div>
         <h2>カテゴリーから探す</h2>
-        <!--
         <section>
             <h3>淡水魚</h3>
             <div class="category">
@@ -150,8 +148,10 @@
 </main>
 
 <!--スライドショーにslickを使う・ローカルだからhttp:を入れる-->
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+<script type="text/javascript" src="{% static 'js/slick/jquery-1.11.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/slick/jquery-migrate-1.2.1.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/slick/slick.min.js' %}"></script>
 <script type="text/javascript">
     $(document).ready(function(){

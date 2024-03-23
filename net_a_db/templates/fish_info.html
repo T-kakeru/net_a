@@ -8,43 +8,78 @@
         <img src="{{ fish_info.preview.url }}" width="50%" max-width="500px">
             
         <div class="fish_info">
-            <div>♡{{ good_count }}</div>
-            {{ fish_info.movie }}
         {% if user.is_authenticated %}
             <form action="{% url 'favorite_toggle' fish_info.id %}" method="post">
                 {% csrf_token %}
-                <button type="submit">いいねする</button>
+                <div class="good_box">
+                    <button type="submit">
+                        <img src="{% static 'img/good.jpg' %}" class="good" alt="" width="32px" height="32px">
+                    </button>
+                    <span class="good_count">{{ good_count }}</span>
+                </div>
             </form>
+        {% else %}
+            <div class="good_box">
+                <img src="{% static 'img/good.jpg' %}" class="good" alt="" width="32px" height="32px">
+                <span class="good_count">{{ good_count }}</span>
+            </div>
         {% endif %}
-        <table>
-            <tr>
-                <th>飼育情報</th><td>{{ fish_info.info }}</td>
-            </tr>
-            <tr>
-                <th>性別</th><td>{{ fish_info.gender }}</td>
-            </tr>
-            <tr>
-                <th>カテゴリー</th><td>{{ fish_info.category }}</td>
-            </tr>
-            <tr>
-                <th>混泳（一緒に住んでいる魚）</th><td>{{ fish_info.fish_mixed }}</td>
-            </tr>
-            <tr>
-                <th>飼育温度</th><td>{{ fish_info.temp }}</td>
-            </tr>
-            <tr>
-                <th>魚の大きさ</th><td>{{ fish_info.fish_size }}</td>
-            </tr>
-            <tr>
-                <th>水槽のサイズ</th><td>{{ fish_info.aquarium_size }}</td>
-            </tr>
-            <tr>
-                <th>レイアウトの情報や、使用器具</th><td>{{ fish_info.material }}</td>
-            </tr>
-            <tr>
-                <th>あげている餌</th><td>{{ fish_info.food }}</td>
-            </tr>
-        </table>
+            <table>
+                {% if fish_info.category %}
+                <tr>
+                    <th>飼育情報</th><td>{{ fish_info.info }}</td>
+                </tr>
+                {% endif %}
+
+                {% if fish_info.gender %}
+                <tr>
+                    <th>性別</th><td>{{ fish_info.get_gender_display }}</td>
+                </tr>
+                {% endif %}
+
+                {% if fish_info.category %}
+                <tr>
+                    <th>カテゴリー</th><td>{{ fish_info.get_category_display }}</td>
+                </tr>
+                {% endif %}
+
+                {% if fish_info.fish_mixed %}
+                <tr>
+                    <th>混泳（一緒に住んでいる魚）</th><td>{{ fish_info.fish_mixed }}</td>
+                </tr>
+                {% endif %}
+                
+                {% if fish_info.temp %}
+                <tr>
+                    <th>飼育温度</th><td>{{ fish_info.get_temp_display }}(℃)</td>
+                </tr>
+                {% endif %}
+
+                {% if fish_info.fish_size %}
+                <tr>
+                    <th>魚の大きさ</th><td>{{ fish_info.fish_size }}(cm)</td>
+                </tr>
+                {% endif %}
+
+                {% if fish_info.aquarium_size %}
+                <tr>
+                    <th>水槽のサイズ</th><td>{{ fish_info.get_aquarium_size_display }}(cm)</td>
+                </tr>
+                {% endif %}
+
+                {% if fish_info.material %}
+                <tr>
+                    <th>レイアウトの情報や、使用器具</th><td>{{ fish_info.material }}</td>
+                </tr>
+                {% endif %}
+
+                {% if fish_info.food %}
+                <tr>
+                    <th>あげている餌</th><td>{{ fish_info.food }}</td>
+                </tr>
+                {% endif %}
+            </table>
+        </div>
     </div>
 </main>
 {% endblock %}

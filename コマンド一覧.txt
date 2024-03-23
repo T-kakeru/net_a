@@ -8,6 +8,8 @@ python manage.py migrate
 
 python manage.py createsuperuser
 
+git init(これでメインにいける)
+
 ギットプッシュhttps://github.com/T-kakeru/net_a.git
 cd /c/users/user/projects_portfolio/django_sample
 cd /c/users/kaker/projects_portfolio/django_sample/net_a
