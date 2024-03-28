@@ -13,36 +13,96 @@ body *{
 
 main {
     min-height: 100vh;
-    background-color:#f0fbff;
+    background-color:#f5fbfd;
     padding-top: 20px;
     padding-bottom: 50px;
     z-index: 5;
 }
 
-table {
-    font-weight: normal;
-    text-align: start;
+h2, h3{
+    font-family: fantasy;
+}
+
+h2{
+    text-align: center;
+}
+
+h3{
+    margin-left: 10px;
+}
+
+#preview_bottom{
+    margin-bottom: 0;
 }
 
 th, td {
     text-align: left; /* thタグ内のテキストを左寄せにする */
     padding: 10px;
     color: rgb(1, 0, 88);/* CSSプロパティ */
+    vertical-align: top;
 }
 
 th {
+    min-width: 160px;
+    max-width: 250px;
     width: auto;
-    min-width: 140px;
-    font-size: 14px;
+    font-size: 16px;
+    text-align: start;
 }
 
 td {
     font-family: sans-serif;
 }
 
-h2, h3{
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.bottom{
+    display: flex;
+    align-items: end;
+}
+
+.form_table_box{
+    display: flex;
+    justify-content: center;
+}
+
+.left{
+    text-align: left;
     margin-left: 10px;
-    font-family: fantasy;
+}
+
+.form_table_item{
+    max-width: 630px;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    font-weight: normal;
+    text-align: start;
+}
+
+.form_table{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.textarea-style{
+    width: 300px;
+    height: 70px;
+}
+
+.input-style{
+    width: 204px;
+    height: 22px;
+}
+
+.int-style{
+    width: 60px;
+    height: 22px;
 }
 
 
@@ -53,7 +113,7 @@ header{
     /*縦、横中央揃え*/
     align-items: center;
     justify-content: center;
-    background-image: url('../img/header.PNG');
+    background-image: url('../img/header.png');
     /*background-color: rgb(173, 243, 255);*/
     position: fixed;
     z-index: 10;
@@ -170,7 +230,6 @@ header{
     width:100px;
     height: 40px;
     margin-top: 20px;
-    margin-left: 100px;
     margin-bottom: 20px;
     background-color: #67a7e2;
     border: none;
@@ -186,9 +245,9 @@ header{
     color: #ffffff;
 }
 
-.register_link{
-    margin-left: 40px;
-    padding-top: 20px;
+#register_link{
+    padding-top: 10px;
+    color: #0f2fa1;
 }
 
 .login_name{
@@ -200,7 +259,7 @@ header{
 /*メイン ホーム*/
 .add_user_help{
     color: #726f6f;
-    font-size: 8px;
+    font-size: 11px;
     padding-top: 0;
     padding-bottom: 20px;
 }
@@ -231,19 +290,18 @@ header{
     position: relative; /* ::before疑似要素の位置決めの基準点とする */
     overflow: hidden; /* 疑似要素のはみ出しを防ぐ */
     text-align: center;
-    padding-left: 40px;
+    padding: 20px;
 }
 
 #tutorial::before {
     content: ''; /* 疑似要素にはcontentプロパティが必要です。 */
     position: absolute; /* 親要素に対して絶対位置指定します。 */
     inset: 0; /* top, right, bottom, left すべてを 0 に設定 */
-    background-image: url('../img/logo_back.png'); /* 背景画像を指定します。 */
+    background-image: url('../img/logo_back1.png'); /* 背景画像を指定します。 */
     background-size: 30%; /* 画像のサイズを元の50%に設定します。 */
     background-repeat: no-repeat; /* 画像の繰り返しをなくします。 */
     background-position: center; /* 画像を要素の中央に配置します。 */
-    filter: blur(8px); /* ぼかし効果を適用します。 */
-    opacity: 0.3; /* 透明度を50%に設定します。 */
+    opacity: 0.1; /* 透明度を50%に設定します。 */
     pointer-events: none; /* 疑似要素上のマウスイベントを無視します。 */
 }
 
@@ -299,6 +357,7 @@ header{
 }
 
 .list_image_box{
+    margin-top: 30px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center; 
@@ -356,9 +415,25 @@ header{
     margin-left: 20px;
 }
 
+.good_end{
+    justify-content: end;
+    margin-right: 55px;
+    margin-top: 8px;
+}
+
+#setting th{
+    width: 130px;
+}
+
+#setting td{
+    font-size: 13px;
+}
+
 .search_help {
-    font-size: 10px;
+    max-width: 380px;
+    font-size: 13px;
     color: #454545;
+    margin-bottom: 10px;
 }
 
 .category {
@@ -372,7 +447,7 @@ header{
     width: 80px;
     height: 60px;
     font-size: 10px;
-    /*background-image: url('image/logo.PNG');*/
+    /*background-image: url('image/logo.png');*/
 }
 
 /*マイページ*/
@@ -429,19 +504,9 @@ header{
     font-size: 8px;
 }
 
-.textarea-style{
-    width: 50%;
-    height: 70px;
-}
-
-.input-style{
-    width: 50%;
-    height: 18px;
-}
-
 /*個人設定*/
 #setting{
-    margin: 0 30px;
+    padding: 20px 30px;
 }
 
 .icon_setting{
@@ -463,6 +528,7 @@ header{
     position: relative; /* 子要素の絶対位置付けの基準点 */
     width: 200px;
     height: 200px;
+    margin-bottom: 30px;
 }
 
 .icon-container .icon {
@@ -518,6 +584,14 @@ header{
     margin-bottom: 50px;
 }
 
+.color_red{
+    color: rgb(236, 54, 54);
+}
+
+#color_bluck{
+    color:#1f1f1f;
+}
+
 .color_sky{
     font-size: 23px;
     color: #16c9c9;
@@ -537,6 +611,23 @@ header{
 
 #privacy{
     padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#privacy h3{
+    padding-left: 0;
+}
+.center_none{
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    color: #454545;
+}
+
+#preview{
+    width: 200px;
+    height: 140px;
 }
 
 
@@ -546,7 +637,7 @@ header{
     padding-left: 10%;
     padding-bottom: 30px;
     /*background-color: rgb(173, 243, 255);*/
-    background-image: url('../img/footer.PNG');
+    background-image: url('../img/footer.png');
     font-weight: bold;
 }
 
@@ -563,6 +654,28 @@ header{
     
     header{
         padding-top: 0px;
+    }
+    
+    table {
+        margin-left: 5px;
+    }
+
+    #setting{
+        padding: 5px;
+    }
+
+    th{
+        min-width: 120px;
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    tr{
+        font-size: 10px;
+    }
+
+    .add_user_help{
+        font-size: 8px;
     }
 
     .header_space{
@@ -587,17 +700,19 @@ header{
         display: contents;
     }
 
-    .add_user_help{
-        font-size: 6px;
-    }
-
     /*mein*/
+
     h2 {
         font-size: 17px;
     }
 
     h3 {
         font-size: 15px;
+    }
+
+    .font_mini{
+        font-size: 11px;
+        margin-right: 0;
     }
 
     .slide_image_item div{
@@ -638,12 +753,20 @@ header{
         border-radius: 75px;
     }
 
+    .search_help {
+        font-size: 10px;
+    }
+
     .textarea-style{
         width: 200px;
     }
 
     .input-style{
         width: 200px;
+    }
+
+    .more_list a{
+        font-size: 13px;
     }
 
     /*個人設定*/
@@ -655,4 +778,9 @@ header{
     .setting_box div{
         font-size: 10px;
     }
+
+    .center_none{
+        font-size: 15px;
+    }
 }
+

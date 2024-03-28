@@ -121,7 +121,7 @@ class FishInfo(models.Model):
         User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=50)
     #previewのカラムを追加
-    preview = models.ImageField(upload_to='upload_img/', null=True, blank=True)
+    preview = models.ImageField(upload_to='upload_img/')
     movie = models.FileField(upload_to='upload_video/', null=True, blank=True)
     info = models.TextField(max_length=1000, null=True, blank=True)
     gender = models.CharField(max_length=20, null=True, blank=True, choices=GENDER_CHOICES)
@@ -131,8 +131,8 @@ class FishInfo(models.Model):
     temp = models.CharField(max_length=20, null=True, blank=True, choices=TEMP_CHOICES)
     fish_size = models.CharField(max_length=20, null=True, blank=True)
     aquarium_size = models.CharField(max_length=20, null=True, blank=True, choices=AQUARIUM_SIZE_CHOICES)
-    material = models.CharField(max_length=200, null=True, blank=True)
-    food = models.CharField(max_length=200, null=True, blank=True)
+    material = models.TextField(max_length=200, null=True, blank=True)
+    food = models.TextField(max_length=200, null=True, blank=True)
     #goodのカラムを追加
     good = models.IntegerField(null=True, blank=True)
     create_at = models.DateTimeField(default=timezone.datetime.now)

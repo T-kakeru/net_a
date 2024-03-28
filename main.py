@@ -8,7 +8,7 @@ setup()
 from net_a_db.models import Icon
 
 p = Icon(
-    icon_file_name = "icon_img/icon1_GMqarSb.PNG",
+    icon_file_name = "icon_img/icon1_GMqarSb.png",
     icon_name = 'イワシー',
     icon_text = '成功した喜びは何物にも代えがたいのです',
 )

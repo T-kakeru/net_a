@@ -18,7 +18,7 @@
     <h2>飼っている魚・近くの魚を投稿</h2>
     <table>
         <tbody>
-        <tr>
+        <tr class="form_table">
             <th>性別</th>
             <td>
                 選択なし<input type="radio" name="sex" value="0">
@@ -28,13 +28,13 @@
         </tr>
         </tbody>
         <tbody>
-        <tr>
+        <tr class="form_table">
             <th>備考</th>
             <td><input type="text"></td>
         </tr>
         </tbody>
         <tbody>
-        <tr>
+        <tr class="form_table">
         <th>飼育平均温度</th>
             <td>
                 <select name="temp_value">
@@ -52,7 +52,7 @@
         </tr>
         </tbody>
         <tbody>
-        <tr>
+        <tr class="form_table">
             <th>飼育水槽サイズ</th>
             <td>
                 <select name="tank_value">
@@ -73,20 +73,20 @@
         </tbody>
         
         <tbody>
-        <tr>
+        <tr class="form_table">
             <th>飼育に使っている用品</th>
             <td><input type="text"></td>
         </tr>
         </tbody>
         
         <tbody>
-        <tr>
+        <tr class="form_table">
             <th>大きさ</th>
             <td><input type="number"> cm</td>
         </tr>
         </tbody>
         <tbody>
-        <tr>
+        <tr class="form_table">
             <th>餌</th>
             <td>
                 人工飼料（粒）<input name="hood_value" type="checkbox">
@@ -110,13 +110,13 @@
         </tr>
         </tbody>
         <tbody>
-        <tr>
+        <tr class="form_table">
             <th>生息地</th>
             <td><input type="text"></td>
         </tr>
         </tbody>
         <tbody>
-        <tr>
+        <tr class="form_table">
             <th>分類</th>
             <td><input type="text"></td>
         </tr>

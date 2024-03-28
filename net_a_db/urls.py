@@ -7,7 +7,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tag_list', views.tag_list, name='tag_list'),
-    path('sign_in', views.sign_in, name='sign_in'),
     path('setting', views.setting, name='setting'),
     path('search', views.search, name='search'),
     path('privacy', views.privacy, name='privacy'),
@@ -17,10 +16,8 @@ urlpatterns = [
     path('history', views.history, name='history'),
     path('genre_list', views.genre_list, name='genre_list'),
     path('favorite_list', views.favorite_list, name='favorite_list'),
-    path('edit_fish_check', views.edit_fish_check, name='edit_fish_check'),
     path('edit_fish', views.edit_fish, name='edit_fish'),
     path('base', views.base, name='base'),
-    path('add_fish_check', views.add_fish_check, name='add_fish_check'),
     path('add_fish', views.add_fish, name='add_fish'),
     path('registration', views.registration, name='registration'),
     path('base_root', views.base_root, name='base_root'),

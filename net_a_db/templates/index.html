@@ -8,7 +8,8 @@
         <p>現在の合計投稿数！〇〇件</p>
     -->
         
-        <h2>最新の投稿</h2>
+        
+        <h2 class="left">最新の投稿</h2>
         <section class="slide_image">
             {% for fish_info in fish_infos %}
                 <a href="{% url 'fish_info' fish_info.id %}">
@@ -25,7 +26,7 @@
         </section>
         <div class="more_list"><a href="{% url 'fish_new_list' %}">もっと見る≫</a></div>
 
-        <h2>人気の魚</h2>
+        <h2 class="left">人気の魚</h2>
         <section class="slide_image">
         {% for fish_info_favorite in fish_infos_favorites %}
             <a href="{% url 'fish_info' fish_info_favorite.id %}">
@@ -42,7 +43,7 @@
         </section>
         <div class="more_list"><a href="{% url 'fish_favorite_list' %}">もっと見る≫</a></div>
 
-        <h2>大きい魚</h2>
+        <h2 class="left">大きい魚</h2>
         <section class="slide_image">
             {% for fish_info_size in fish_infos_size %}
                 <a href="{% url 'fish_info' fish_info_size.id %}">
@@ -75,7 +76,7 @@
             {% endfor %}
         </section>
         <div class="more_list"><a href="{% url 'fish_new_list' %}">もっと見る</a></div>
-        <h2>カテゴリーから探す</h2>
+        <h2>＃タグから探す</h2>
         <section>
             <h3>淡水魚</h3>
             <div class="category">
@@ -147,11 +148,19 @@
     </div>
 </main>
 
+<!-- サーバーにアップ -->
+<!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+
 <!--スライドショーにslickを使う・ローカルだからhttp:を入れる-->
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
-<script type="text/javascript" src="{% static 'js/slick/jquery-1.11.0.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/slick/jquery-migrate-1.2.1.min.js' %}"></script>
+<!-- ローカル -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+<!--static-->
+<!--<script type="text/javascript" src="{% static 'js/slick/jquery-1.11.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/slick/jquery-migrate-1.2.1.min.js' %}"></script>-->
+
 <script type="text/javascript" src="{% static 'js/slick/slick.min.js' %}"></script>
 <script type="text/javascript">
     $(document).ready(function(){

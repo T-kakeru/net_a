@@ -2,26 +2,7 @@
 
 {% block content %}
 <main>
-    <h2>自分の投稿</h2>
-    <section class="list_image">
-        <div class="list_image_box">
-        {% for fish_info in my_fishs %}
-            {% if fish_info.preview %}
-            <a href="{% url 'edit_fish_info' fish_info.id %}">
-                <div class="list_image_item">
-                    <div>
-                        <div>{{ fish_info.name }}</div>
-                        <img src="{{ fish_info.preview.url }}" alt="{{ fish_info.name }}" width="100%">
-                    </div>
-                </div>
-            </a>
-            {% endif %}
-        {% endfor %}
-        </div>
-    </section>
-
 <h2>閲覧履歴</h2>
-
     <section class="list_image">
         <div class="list_image_box">
             {% for history in histories %}
@@ -36,7 +17,7 @@
                 </div>
             </a>
             {% empty %}
-                <p>閲覧履歴はありません。</p>
+                <div class="center_none"><div>閲覧履歴はありません。</div></div>
             {% endfor %}
         </div>
     </section>

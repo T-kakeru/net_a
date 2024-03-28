@@ -7,7 +7,6 @@
     <section class="list_image">
         <div class="list_image_box">
         {% for fish_info in my_fishs %}
-            {% if fish_info.preview %}
             <a href="{% url 'edit_fish_info' fish_info.id %}">
                 <div class="list_image_item">
                     <div>
@@ -16,10 +15,11 @@
                     </div>
                 </div>
             </a>
-            {% endif %}
+            {% empty %}
+                <div class="center_none"><div>まだ、記事を投稿していません</div></div>
         {% endfor %}
+        
         </div>
     </section>
-
 </main>
 {% endblock %}

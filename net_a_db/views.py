@@ -4,8 +4,6 @@ from django.http import HttpResponse
 # Create your views here.
 def tag_list(request):
     return render(request, 'tag_list.html')
-def sign_in(request):
-    return render(request, 'sign_in.html')
 def setting(request):
     return render(request, 'setting.html')
 def search(request):
@@ -28,14 +26,10 @@ def favorite_list(request):
     return render(request, 'favorite_list.html')
 def fish_info(request):
     return render(request, 'fish_info.html')
-def edit_fish_check(request):
-    return render(request, 'edit_fish_check.html')
 def edit_fish(request):
     return render(request, 'edit_fish.html')
 def base(request):
     return render(request, 'base.html')
-def add_fish_check(request):
-    return render(request, 'add_fish_check.html')
 def registration(request):
     return render(request, 'registration.html')
 def base_root(request):
@@ -44,27 +38,33 @@ def first(request):
     return render(request, 'first.html')
 
 
-from net_a_db.forms import UserForm, LoginForm, ProfileForm
+from net_a_db.forms import UserForm, LoginForm, UserProfile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
 #新規登録
 def register(request):
+    error_message = ""
     if request.method == 'POST':
         user_form = UserForm(request.POST)
-        profile_form = ProfileForm(request.POST, request.FILES)
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid():
             user = user_form.save()
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            profile.save()
+            UserProfile.objects.create(user=user, icon_id=1)
             login(request, user)  # ユーザーをログインさせる
             return redirect('first')
+        else:
+            if 'password1' in user_form.errors:
+                error_message = 'パスワードは6文字以上で入力してください。'
+            elif 'username' in user_form.errors:
+                error_message = '存在するユーザーです。'
+            else:
+                error_message = '入力を確認してください、入力が正しくありません。'
     else:
         user_form = UserForm()
-        profile_form = ProfileForm()
-    return render(request, 'registration.html', {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'registration.html', {'user_form': user_form, 'error_message': error_message})
 
+#ログイン
 def user_login(request):
     login_form = LoginForm(request.POST or None)
     if login_form.is_valid():
@@ -73,29 +73,58 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         #ユーザーが存在するか、パスワードがあっているか
         if user:
-            if user.is_active:
                 login(request, user)
                 return redirect('index')
-            else:
-                return HttpResponse('アカウントがアクティブでないです')
         else:
-            return HttpResponse('ユーザーが存在しません')
-    return render(request, 'login.html', context={
-        'login_form': login_form
-    })
+            error_message = 'ユーザーが存在しません'
+            return render(request, 'login.html', context={'login_form': login_form, 'error_message': error_message})
+    return render(request, 'login.html', context={'login_form': login_form})
 
 from .forms import FishInfoForm
 from .models import FishInfo, History
 
+#投稿機能
 def add_fish(request):
-    fish_info_form = FishInfoForm(request.POST, request.FILES)
-    if fish_info_form.is_valid():
-        fish_info = fish_info_form.save(commit=False)
-        fish_info.user = request.user
-        fish_info.category = fish_info_form.cleaned_data.get('category')
-        fish_info_form.save()
-        return redirect('my_page')
-    return render(request, 'add_fish.html', {'fish_info_form': fish_info_form})
+    error_message = ''  # エラーメッセージを初期化
+    if request.method == 'POST':
+        fish_info_form = FishInfoForm(request.POST, request.FILES)
+        if fish_info_form.is_valid():
+            if not request.POST.get('name') or not request.FILES.get('preview'):
+                error_message = '写真は必須です。'
+                return render(request, 'add_fish.html', {'fish_info_form': fish_info_form, 'error_message': error_message})
+            else:
+                fish_info = fish_info_form.save(commit=False)
+                fish_info.user = request.user
+                fish_info.category = fish_info_form.cleaned_data.get('category')
+                fish_info_form.save()
+                return redirect('my_fish')
+        else:
+            error_message = 'フォームにエラーがあります。'
+    else:
+        fish_info_form = FishInfoForm()
+    return render(request, 'add_fish.html', {'fish_info_form': fish_info_form, 'error_message': error_message})
+
+#投稿編集
+@login_required
+def edit_fish_info(request, fish_id):
+    fish_info = get_object_or_404(FishInfo, id=fish_id, user=request.user)
+    error_message = ''  # エラーメッセージ用の変数を初期化
+    if request.method == "POST":
+        fish_info_form = FishInfoForm(request.POST, request.FILES, instance=fish_info)
+        if fish_info_form.is_valid():
+            fish_info_form.save()
+            return redirect('my_fish')  # 魚情報の詳細ページへリダイレクト
+        else:
+            error_message = 'フォームにエラーがあります。'  # フォームのバリデーションエラー時のメッセージ
+    else:
+        fish_info_form = FishInfoForm(instance=fish_info)
+    return render(request, 'edit_fish_info.html', {
+        'fish_info_form': fish_info_form,
+        'fish_info': fish_info,
+        'error_message': error_message  # エラーメッセージをテンプレートに渡す
+    })
+
+
 
 @login_required
 def user_logout(request):
@@ -182,19 +211,22 @@ from django.db.models import Q
 from django.urls import reverse
 # フォームからのPOSTリクエストを処理するビュー
 def search_fish_info(request):
-    if request.method == 'POST':# POSTリクエストを受け取った場合
-        query = request.POST.get('q', '')# フォームから検索クエリを取得
-        return redirect(f"{reverse('search_results')}?q={query}")# 検索クエリをURLパラメータに含めて、検索結果表示ビューにリダイレクト
-    return render(request, 'search_form.html')# 検索後も再度検索を表示する
+    if request.method == 'POST':  # POSTリクエストを受け取った場合
+        query = request.POST.get('q', '')  # フォームから検索クエリを取得
+        return redirect(f"{reverse('search_results')}?q={query}")  # 検索クエリをURLパラメータに含めてリダイレクト
+    return render(request, 'search_form.html')
 
-# 検索結果を表示
+# 検索結果を表示するビュー
 def search_results(request):
-    query = request.GET.get('q', '')# GETリクエストから検索クエリを取得
-    if query:# 検索クエリに基づいてFishInfoオブジェクトを検索
+    query = request.GET.get('q', '')  # GETリクエストから検索クエリを取得
+    context = {'query': query}
+    if query:  # 検索クエリに基づいてFishInfoオブジェクトを検索
         fish_info_search = FishInfo.objects.filter(Q(name__icontains=query) | Q(category__icontains=query))
-    else:
-        fish_info_search = FishInfo.objects.none()# 検索クエリが空の場合は、空のクエリセットを生成
-    return render(request, 'search.html', {'fish_info_search': fish_info_search, 'query': query})
+        if not fish_info_search.exists():
+            context['error'] = '該当する情報が見つかりません。'
+        else:
+            context['fish_info_search'] = fish_info_search
+    return render(request, 'search.html', context)
 
 #アイコン選択機能
 from .models import UserProfile, Icon
@@ -204,7 +236,7 @@ from django.contrib.auth.decorators import login_required
 def icon_change(request):
     if request.method == 'POST':
         icon_id = request.POST.get('icon_id')
-        new_icon = Icon.objects.get(id=icon_id)
+        new_icon = Icon.objects.get(id=icon_id)  # 修正した行
         user_profile = UserProfile.objects.get(user=request.user)
         user_profile.icon = new_icon
         user_profile.save()
@@ -213,19 +245,19 @@ def icon_change(request):
         icons = Icon.objects.all()
         return render(request, 'icon_change.html', {'icons': icons})
 
-#編集機能
+# #編集機能
 
-@login_required
-def edit_fish_info(request, fish_id):
-    fish_info = get_object_or_404(FishInfo, id=fish_id, user=request.user)
-    if request.method == "POST":
-        form = FishInfoForm(request.POST, request.FILES, instance=fish_info)
-        if form.is_valid():
-            form.save()
-            return redirect('my_page')  # 魚情報の詳細ページへリダイレクト
-    else:
-        form = FishInfoForm(instance=fish_info)
-    return render(request, 'edit_fish_info.html', {'form': form, 'fish_info': fish_info})
+# @login_required
+# def edit_fish_info(request, fish_id):
+#     fish_info = get_object_or_404(FishInfo, id=fish_id, user=request.user)
+#     if request.method == "POST":
+#         form = FishInfoForm(request.POST, request.FILES, instance=fish_info)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('my_fish')  # 魚情報の詳細ページへリダイレクト
+#     else:
+#         form = FishInfoForm(instance=fish_info)
+#     return render(request, 'edit_fish_info.html', {'form': form, 'fish_info': fish_info})
     
 """
 from .models import FishInfo

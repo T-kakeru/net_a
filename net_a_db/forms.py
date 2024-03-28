@@ -132,13 +132,13 @@ class FishInfoForm(forms.ModelForm):
     movie = forms.FileField(label="動画", required=False)
     info = forms.CharField(widget=forms.Textarea(attrs={'placeholder': '飼育情報', 'class': 'textarea-style'}), label="飼育情報", required=False)
     gender = forms.ChoiceField(choices=GENDER_CHOICES, label="性別", required=False, widget=forms.Select())
-    category = forms.ChoiceField(choices=CATEGORY_CHOICES,label="カテゴリー", required=False, widget=forms.Select())
-    fish_mixed = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '混泳できた魚', 'class': 'textarea-style'}), label="混泳情報", required=False)
+    category = forms.ChoiceField(choices=CATEGORY_CHOICES,label="＃タグ", required=False, widget=forms.Select())
+    fish_mixed = forms.CharField(widget=forms.Textarea(attrs={'placeholder': '混泳できた魚', 'class': 'textarea-style'}), label="混泳情報", required=False)
     temp = forms.ChoiceField(choices=TEMP_CHOICES, label="適正温度", required=False)
-    fish_size = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': '魚のサイズ', 'class': 'input-style'}), label="魚のサイズ", required=False)
+    fish_size = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'int-style'}), label="魚のサイズ", required=False, min_value=1)
     aquarium_size = forms.ChoiceField(choices=AQUARIUM_SIZE_CHOICES, label="水槽サイズ", required=False)
-    material = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'レイアウト、使用器具', 'class': 'input-style'}), label="レイアウト情報", required=False)
-    food = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '餌', 'class': 'input-style'}), label="餌", required=False)
+    material = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'レイアウト、使用器具', 'class': 'textarea-style'}), label="レイアウト情報", required=False)
+    food = forms.CharField(widget=forms.Textarea(attrs={'placeholder': '餌', 'class': 'textarea-style'}), label="餌", required=False)
 
     class Meta:
         model = FishInfo
